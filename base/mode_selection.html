@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模式选择</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #4F46E5 0%, #8B5CF6 100%);
+      background-attachment: fixed;
+      padding-bottom: 20px;
+    }
+    
+    .mode-card {
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    
+    .mode-card:active {
+      transform: scale(0.98);
+    }
+    
+    .mode-card-content {
+      transition: transform 0.5s;
+    }
+    
+    .mode-card:hover .mode-card-content {
+      transform: translateY(-5px);
+    }
+    
+    .shine-effect {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .shine-effect::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+      from {
+        left: -50%;
+      }
+      to {
+        left: 150%;
+      }
+    }
+    
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+  </style>
+</head>
+<body class="text-white">
+  <div class="container mx-auto px-4 pt-6 pb-6">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">选择挑战模式</h1>
+        <div class="text-indigo-200 text-sm">伤寒论 · 第25章 · 第3关</div>
+      </div>
+      
+      <button onclick="navigateTo('levels.html')" class="bg-white bg-opacity-20 rounded-full p-2">
+        <i class="fas fa-times text-white"></i>
+      </button>
+    </div>
+    
+    <div class="text-center mb-8">
+      <div class="inline-block bg-indigo-800 bg-opacity-50 rounded-full px-4 py-2 mb-2">
+        <div class="text-lg font-bold">当前关卡内容</div>
+      </div>
+      <p class="text-lg text-indigo-100">伤寒论有持续发热五日，脉浮紧，头痛。第二十五章第二句：给予桂枝汤治疗。</p>
+    </div>
+    
+    <!-- 模式选择网格 -->
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <!-- 听力模式 -->
+      <div class="col-span-1 mode-card" onclick="navigateTo('listening.html')">
+        <div class="bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl p-5 text-center h-full mode-card-content shine-effect">
+          <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-headphones text-white text-3xl"></i>
+          </div>
+          
+          <h3 class="font-bold text-xl mb-2">听力挑战</h3>
+          <p class="text-sm text-pink-200 mb-4">聆听文本，提高听力理解</p>
+          
+          <div class="inline-block bg-white bg-opacity-20 rounded-full px-3 py-1 text-xs">
+            预计用时: 2分钟
+          </div>
+          <div class="mt-2 text-xs text-pink-100">
+            <i class="fas fa-gift text-yellow-300 mr-1"></i>今日奖励: <span class="font-bold">1/3</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 口语模式 -->
+      <div class="col-span-1 mode-card" onclick="navigateTo('speaking.html')">
+        <div class="bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl p-5 text-center h-full mode-card-content shine-effect">
+          <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-microphone text-white text-3xl"></i>
+          </div>
+          
+          <h3 class="font-bold text-xl mb-2">口语挑战</h3>
+          <p class="text-sm text-green-200 mb-4">朗读文本，提高发音准确性</p>
+          
+          <div class="inline-block bg-white bg-opacity-20 rounded-full px-3 py-1 text-xs">
+            预计用时: 3分钟
+          </div>
+          <div class="mt-2 text-xs text-green-100">
+            <i class="fas fa-gift text-yellow-300 mr-1"></i>今日奖励: <span class="font-bold">2/3</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 阅读模式 -->
+      <div class="col-span-1 mode-card" onclick="navigateTo('reading.html')">
+        <div class="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-5 text-center h-full mode-card-content shine-effect">
+          <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-book-open text-white text-3xl"></i>
+          </div>
+          
+          <h3 class="font-bold text-xl mb-2">阅读挑战</h3>
+          <p class="text-sm text-blue-200 mb-4">逐字揭示，提高阅读理解</p>
+          
+          <div class="inline-block bg-white bg-opacity-20 rounded-full px-3 py-1 text-xs">
+            预计用时: 2分钟
+          </div>
+          <div class="mt-2 text-xs text-blue-100">
+            <i class="fas fa-gift text-yellow-300 mr-1"></i>今日奖励: <span class="font-bold">0/3</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 写作模式 -->
+      <div class="col-span-1 mode-card" onclick="navigateTo('writing.html')">
+        <div class="bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl p-5 text-center h-full mode-card-content shine-effect">
+          <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-pen text-white text-3xl"></i>
+          </div>
+          
+          <h3 class="font-bold text-xl mb-2">写作挑战</h3>
+          <p class="text-sm text-yellow-200 mb-4">输入文本，提高书写能力</p>
+          
+          <div class="inline-block bg-white bg-opacity-20 rounded-full px-3 py-1 text-xs">
+            预计用时: 4分钟
+          </div>
+          <div class="mt-2 text-xs text-yellow-100">
+            <i class="fas fa-gift text-yellow-300 mr-1"></i>今日奖励: <span class="font-bold">3/3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 全部模式挑战 -->
+    <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-md rounded-xl p-5 mb-6 animate-float">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-xl mb-1">全部模式挑战</h3>
+          <p class="text-sm text-indigo-200">连续完成所有四种挑战模式</p>
+        </div>
+        
+        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+          <i class="fas fa-fire text-white text-2xl"></i>
+        </div>
+      </div>
+      
+      <div class="mt-4 grid grid-cols-4 gap-2">
+        <div class="bg-white bg-opacity-20 rounded-md p-2 text-center">
+          <i class="fas fa-headphones text-sm"></i>
+          <span class="text-xs block mt-1">听力</span>
+        </div>
+        
+        <div class="bg-white bg-opacity-20 rounded-md p-2 text-center">
+          <i class="fas fa-microphone text-sm"></i>
+          <span class="text-xs block mt-1">口语</span>
+        </div>
+        
+        <div class="bg-white bg-opacity-20 rounded-md p-2 text-center">
+          <i class="fas fa-book-open text-sm"></i>
+          <span class="text-xs block mt-1">阅读</span>
+        </div>
+        
+        <div class="bg-white bg-opacity-20 rounded-md p-2 text-center">
+          <i class="fas fa-pen text-sm"></i>
+          <span class="text-xs block mt-1">写作</span>
+        </div>
+      </div>
+      
+      <button class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-3 rounded-lg mt-4">
+        开始全部挑战 (预计11分钟)
+      </button>
+    </div>
+    
+    <!-- 奖励提示 -->
+    <div class="text-center text-sm text-indigo-200 mb-8">
+      <p class="mb-1">完成全部四种挑战可获得额外奖励!</p>
+      <p>
+        <i class="fas fa-gem text-yellow-300 mr-1"></i>
+        <span>+50宝石</span>
+        <i class="fas fa-star text-yellow-300 mx-1"></i>
+        <span>额外经验值</span>
+      </p>
+    </div>
+  </div>
+  
+  <script>
+    function navigateTo(route) {
+      if (window.parent && window.parent.postMessage) {
+        window.parent.postMessage({ route: route }, '*');
+      } else {
+        window.location.href = route;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>口语挑战</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #0E9F6E 0%, #047857 100%);
+      background-attachment: fixed;
+      padding-bottom: 90px;
+    }
+    
+    .mic-button {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .mic-button:active {
+      transform: scale(0.95);
+    }
+    
+    @keyframes recording-pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.8);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(220, 38, 38, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+      }
+    }
+    
+    .recording {
+      animation: recording-pulse 1.5s infinite;
+    }
+    
+    .button-3d {
+      box-shadow: 0 4px 0 #046C4E;
+      transform: translateY(-4px);
+      transition: all 0.1s;
+    }
+    
+    .button-3d:active {
+      box-shadow: 0 0 0 #046C4E;
+      transform: translateY(0);
+    }
+    
+    .sound-wave {
+      display: flex;
+      align-items: center;
+      height: 60px;
+    }
+    
+    .sound-wave .bar {
+      width: 5px;
+      height: 3px;
+      margin: 0 2px;
+      background-color: #F87171;
+      border-radius: 3px;
+      animation: sound-wave-jump 0.5s infinite;
+    }
+    
+    @keyframes sound-wave-jump {
+      0% {
+        height: 3px;
+      }
+      50% {
+        height: 15px;
+      }
+      100% {
+        height: 3px;
+      }
+    }
+    
+    .sound-wave.hidden-wave .bar {
+      height: 3px;
+      animation: none;
+    }
+    
+    .progress-circles {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    
+    .progress-circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin: 0 3px;
+    }
+    
+    .progress-circle.active {
+      background-color: white;
+      box-shadow: 0 0 5px white;
+    }
+  </style>
+</head>
+<body class="text-white">
+  <div class="container mx-auto px-4 pt-6 pb-24">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">口语挑战</h1>
+        <div class="text-green-200 text-sm">伤寒论 · 第25章</div>
+      </div>
+      
+      <button onclick="navigateTo('challenges.html')" class="bg-white bg-opacity-20 rounded-full p-2 button-3d">
+        <i class="fas fa-times text-white"></i>
+      </button>
+    </div>
+    
+    <!-- 进度指示器 -->
+    <div class="progress-circles">
+      <div class="progress-circle active"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+    </div>
+    
+    <!-- 挑战卡片 -->
+    <div class="bg-white bg-opacity-20 backdrop-filter backdrop-blur-md rounded-xl p-6 mb-6">
+      <div class="text-center mb-6">
+        <div class="inline-block bg-green-800 bg-opacity-50 rounded-full px-4 py-1 mb-4 text-sm">
+          <i class="fas fa-microphone mr-2"></i>口语挑战
+        </div>
+        
+        <h2 class="text-lg font-bold mb-2">朗读以下文本内容</h2>
+        <p class="text-green-200 text-sm">按住麦克风按钮开始录音，松开结束</p>
+      </div>
+      
+      <!-- 段落区域 -->
+      <div class="bg-black bg-opacity-20 rounded-xl p-4 mb-6">
+        <div class="text-lg leading-relaxed text-center">
+          伤寒论有持续发热五日，脉浮紧，头痛。第二十五章第二句：给予桂枝汤治疗。
+        </div>
+      </div>
+      
+      <!-- 录音区域 -->
+      <div class="flex flex-col items-center mb-6">
+        <div class="sound-wave hidden-wave mb-4" id="soundWave">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        
+        <button id="micButton" class="w-24 h-24 bg-green-600 hover:bg-green-500 rounded-full flex items-center justify-center shadow-lg mic-button button-3d">
+          <i class="fas fa-microphone text-3xl"></i>
+        </button>
+        
+        <div class="mt-4 text-sm text-green-200" id="recordingStatus">
+          按住开始录音
+        </div>
+      </div>
+      
+      <!-- 识别结果 -->
+      <div class="bg-black bg-opacity-20 rounded-xl p-4 mb-4 h-24 overflow-y-auto" id="recognitionResult">
+        <p class="text-gray-300 text-center">您的录音将显示在这里...</p>
+      </div>
+      
+      <!-- 结果对比按钮 -->
+      <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 py-3 rounded-lg flex items-center justify-center button-3d">
+        <i class="fas fa-check-double mr-2"></i>对比发音
+      </button>
+    </div>
+    
+    <!-- 下一步按钮 -->
+    <div class="flex space-x-4">
+      <button class="flex-1 bg-white bg-opacity-20 hover:bg-opacity-30 py-4 rounded-xl font-bold button-3d">
+        <i class="fas fa-redo mr-2"></i>重新录制
+      </button>
+      
+      <button class="flex-1 bg-green-600 hover:bg-green-500 py-4 rounded-xl font-bold button-3d">
+        <i class="fas fa-arrow-right mr-2"></i>下一题
+      </button>
+    </div>
+    
+    <!-- 下方提示 -->
+    <div class="mt-6 text-center text-sm text-green-200">
+      <p>完成5组口语训练后解锁下一关</p>
+      <p class="mt-2">当前进度: 1/5</p>
+    </div>
+  </div>
+  
+  <script>
+    // 麦克风按钮控制
+    const micButton = document.getElementById('micButton');
+    const soundWave = document.getElementById('soundWave');
+    const recordingStatus = document.getElementById('recordingStatus');
+    const recognitionResult = document.getElementById('recognitionResult');
+    
+    let isRecording = false;
+    
+    micButton.addEventListener('mousedown', function() {
+      isRecording = true;
+      micButton.classList.add('recording');
+      soundWave.classList.remove('hidden-wave');
+      recordingStatus.textContent = '正在录音...';
+    });
+    
+    micButton.addEventListener('mouseup', function() {
+      isRecording = false;
+      micButton.classList.remove('recording');
+      soundWave.classList.add('hidden-wave');
+      recordingStatus.textContent = '录音完成';
+      
+      // 模拟识别结果
+      setTimeout(function() {
+        recognitionResult.innerHTML = '<p>伤寒论有持续发热五日，脉浮紧，头痛。第二十五章第二句：给予桂枝汤治疗。</p>';
+      }, 1000);
+    });
+    
+    micButton.addEventListener('mouseleave', function() {
+      if (isRecording) {
+        isRecording = false;
+        micButton.classList.remove('recording');
+        soundWave.classList.add('hidden-wave');
+        recordingStatus.textContent = '录音中断';
+      }
+    });
+    
+    function navigateTo(route) {
+      if (window.parent && window.parent.postMessage) {
+        window.parent.postMessage({ route: route }, '*');
+      } else {
+        window.location.href = route;
+      }
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>挑战选择</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #6D28D9 0%, #4F46E5 100%);
+      background-attachment: fixed;
+      padding-bottom: 90px;
+    }
+    
+    .challenge-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .challenge-icon:active {
+      transform: scale(0.9);
+    }
+    
+    .glow {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+      }
+    }
+    
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(26, 32, 44, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(20px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="text-white">
+  <!-- 背景粒子效果 -->
+  <div id="particles"></div>
+  
+  <div class="container mx-auto px-4 pt-6 pb-24">
+    <div class="flex justify-between items-center mb-2">
+      <h1 class="text-2xl font-bold">挑战场</h1>
+      
+      <button onclick="navigateTo('home.html')" class="bg-white bg-opacity-20 rounded-full p-2">
+        <i class="fas fa-times text-white"></i>
+      </button>
+    </div>
+    
+    <div class="flex justify-between items-center mb-6">
+      <div class="text-indigo-200">
+        <h2 class="font-medium">伤寒论 · 第25章</h2>
+        <div class="flex items-center text-sm">
+          <i class="fas fa-fire-alt text-yellow-400 mr-1"></i>
+          <span>连续学习8天</span>
+        </div>
+      </div>
+      
+      <button class="bg-white bg-opacity-20 rounded-full p-2">
+        <i class="fas fa-calendar-alt text-white"></i>
+      </button>
+    </div>
+    
+    <!-- 挑战类型选择 -->
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <!-- 听力挑战 -->
+      <div class="col-span-1" onclick="navigateTo('listening.html')">
+        <div class="bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl p-4 text-center challenge-icon glow">
+          <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fas fa-headphones text-white text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-lg">听力挑战</h3>
+          <p class="text-xs text-pink-200 mt-1">聆听文本，提高听力理解</p>
+          
+          <div class="mt-3 text-xs">
+            <div class="flex justify-between mb-1">
+              <span>完成度</span>
+              <span>8/20</span>
+            </div>
+            <div class="w-full bg-white bg-opacity-20 rounded-full h-1.5">
+              <div class="bg-white h-1.5 rounded-full w-2/5"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 口语挑战 -->
+      <div class="col-span-1" onclick="navigateTo('speaking.html')">
+        <div class="bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl p-4 text-center challenge-icon">
+          <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fas fa-microphone text-white text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-lg">口语挑战</h3>
+          <p class="text-xs text-green-200 mt-1">朗读文本，提高发音准确性</p>
+          
+          <div class="mt-3 text-xs">
+            <div class="flex justify-between mb-1">
+              <span>完成度</span>
+              <span>5/20</span>
+            </div>
+            <div class="w-full bg-white bg-opacity-20 rounded-full h-1.5">
+              <div class="bg-white h-1.5 rounded-full w-1/4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 阅读挑战 -->
+      <div class="col-span-1" onclick="navigateTo('reading.html')">
+        <div class="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-4 text-center challenge-icon">
+          <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fas fa-book-open text-white text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-lg">阅读挑战</h3>
+          <p class="text-xs text-blue-200 mt-1">逐字揭示，提高阅读理解</p>
+          
+          <div class="mt-3 text-xs">
+            <div class="flex justify-between mb-1">
+              <span>完成度</span>
+              <span>12/20</span>
+            </div>
+            <div class="w-full bg-white bg-opacity-20 rounded-full h-1.5">
+              <div class="bg-white h-1.5 rounded-full w-3/5"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 写作挑战 -->
+      <div class="col-span-1" onclick="navigateTo('writing.html')">
+        <div class="bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl p-4 text-center challenge-icon">
+          <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fas fa-pen text-white text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-lg">写作挑战</h3>
+          <p class="text-xs text-yellow-200 mt-1">输入文本，提高书写能力</p>
+          
+          <div class="mt-3 text-xs">
+            <div class="flex justify-between mb-1">
+              <span>完成度</span>
+              <span>6/20</span>
+            </div>
+            <div class="w-full bg-white bg-opacity-20 rounded-full h-1.5">
+              <div class="bg-white h-1.5 rounded-full w-1/3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 每日挑战 -->
+    <div class="bg-white bg-opacity-10 rounded-xl p-4 mb-6">
+      <h3 class="font-bold text-lg mb-3">
+        <i class="fas fa-calendar-day text-purple-300 mr-2"></i>每日挑战
+      </h3>
+      
+      <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg p-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="font-bold">今日推荐训练</h4>
+            <p class="text-sm text-indigo-200 mt-1">完成全部四种挑战获得额外奖励</p>
+          </div>
+          
+          <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+            <i class="fas fa-gift text-yellow-300 text-2xl animate-pulse"></i>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-4 gap-2 mt-4">
+          <div class="bg-white bg-opacity-20 rounded-md p-2 text-center">
+            <i class="fas fa-headphones text-sm"></i>
+            <span class="text-xs block mt-1">听力</span>
+          </div>
+          
+          <div class="bg-white bg-opacity-20 rounded-md p-2 text-center">
+            <i class="fas fa-microphone text-sm"></i>
+            <span class="text-xs block mt-1">口语</span>
+          </div>
+          
+          <div class="bg-white bg-opacity-20 rounded-md p-2 text-center">
+            <i class="fas fa-book-open text-sm"></i>
+            <span class="text-xs block mt-1">阅读</span>
+          </div>
+          
+          <div class="bg-white bg-opacity-20 rounded-md p-2 text-center">
+            <i class="fas fa-pen text-sm"></i>
+            <span class="text-xs block mt-1">写作</span>
+          </div>
+        </div>
+        
+        <button class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg py-2 mt-4 font-medium">
+          开始今日挑战
+        </button>
+      </div>
+    </div>
+    
+    <!-- 学习进度 -->
+    <div class="bg-white bg-opacity-10 rounded-xl p-4">
+      <h3 class="font-bold text-lg mb-3">
+        <i class="fas fa-chart-line text-blue-300 mr-2"></i>学习进度
+      </h3>
+      
+      <div class="space-y-3">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+            <i class="fas fa-check text-white"></i>
+          </div>
+          <div class="flex-1">
+            <div class="flex justify-between">
+              <span class="font-medium">伤寒论 第24章</span>
+              <span class="text-xs text-green-300">已完成</span>
+            </div>
+            <div class="w-full bg-white bg-opacity-20 rounded-full h-1.5 mt-1">
+              <div class="bg-green-500 h-1.5 rounded-full w-full"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+            <i class="fas fa-sync-alt text-white"></i>
+          </div>
+          <div class="flex-1">
+            <div class="flex justify-between">
+              <span class="font-medium">伤寒论 第25章</span>
+              <span class="text-xs text-blue-300">进行中</span>
+            </div>
+            <div class="w-full bg-white bg-opacity-20 rounded-full h-1.5 mt-1">
+              <div class="bg-blue-500 h-1.5 rounded-full w-1/2"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+            <i class="fas fa-lock text-white"></i>
+          </div>
+          <div class="flex-1">
+            <div class="flex justify-between">
+              <span class="font-medium">伤寒论 第26章</span>
+              <span class="text-xs text-gray-300">未解锁</span>
+            </div>
+            <div class="w-full bg-white bg-opacity-20 rounded-full h-1.5 mt-1">
+              <div class="bg-gray-500 h-1.5 rounded-full w-0"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部导航 -->
+  <div class="bottom-nav text-white py-2 px-4">
+    <div class="flex justify-around items-center">
+      <div class="text-center">
+        <button onclick="navigateTo('home.html')" class="w-12 h-12 rounded-full bg-black bg-opacity-40 flex items-center justify-center mx-auto">
+          <i class="fas fa-home text-xl"></i>
+        </button>
+        <span class="text-xs mt-1 block">主页</span>
+      </div>
+      
+      <div class="text-center">
+        <button onclick="navigateTo('training.html')" class="w-12 h-12 rounded-full bg-black bg-opacity-40 flex items-center justify-center mx-auto">
+          <i class="fas fa-dumbbell text-xl"></i>
+        </button>
+        <span class="text-xs mt-1 block">训练</span>
+      </div>
+      
+      <div class="text-center">
+        <button onclick="navigateTo('rewards.html')" class="w-12 h-12 rounded-full bg-black bg-opacity-40 flex items-center justify-center mx-auto">
+          <i class="fas fa-trophy text-xl"></i>
+        </button>
+        <span class="text-xs mt-1 block">成就</span>
+      </div>
+      
+      <div class="text-center">
+        <button onclick="navigateTo('statistics.html')" class="w-12 h-12 rounded-full bg-black bg-opacity-40 flex items-center justify-center mx-auto">
+          <i class="fas fa-chart-line text-xl"></i>
+        </button>
+        <span class="text-xs mt-1 block">统计</span>
+      </div>
+      
+      <div class="text-center">
+        <button onclick="navigateTo('settings.html')" class="w-12 h-12 rounded-full bg-black bg-opacity-40 flex items-center justify-center mx-auto">
+          <i class="fas fa-cog text-xl"></i>
+        </button>
+        <span class="text-xs mt-1 block">设置</span>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // 创建背景粒子
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const numberOfParticles = 20;
+      
+      for (let i = 0; i < numberOfParticles; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // 随机位置和延迟
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 15}s`;
+        particle.style.animationDuration = `${10 + Math.random() * 20}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    createParticles();
+    
+    function navigateTo(route) {
+      if (window.parent && window.parent.postMessage) {
+        window.parent.postMessage({ route: route }, '*');
+      } else {
+        window.location.href = route;
+      }
+    }
+  </script>
+</body>
+</html>
+

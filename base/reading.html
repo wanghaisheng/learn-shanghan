@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阅读挑战</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+      background-attachment: fixed;
+      padding-bottom: 90px;
+    }
+    
+    .scratch-area {
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .character {
+      display: inline-block;
+      position: relative;
+      width: 1.5em;
+      height: 1.5em;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.5em;
+      margin: 0.2em;
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+    
+    .character::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #2563EB;
+      border-radius: 0.25em;
+      transition: opacity 0.3s;
+    }
+    
+    .character.revealed::before {
+      opacity: 0;
+    }
+    
+    .character-reveal {
+      animation: reveal 0.5s forwards;
+    }
+    
+    @keyframes reveal {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    
+    .button-3d {
+      box-shadow: 0 4px 0 #1E3A8A;
+      transform: translateY(-4px);
+      transition: all 0.1s;
+    }
+    
+    .button-3d:active {
+      box-shadow: 0 0 0 #1E3A8A;
+      transform: translateY(0);
+    }
+    
+    .shine-effect {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .shine-effect::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+      0% {
+        left: -50%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+    
+    .progress-circles {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    
+    .progress-circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin: 0 3px;
+    }
+    
+    .progress-circle.active {
+      background-color: white;
+      box-shadow: 0 0 5px white;
+    }
+    
+    .reading-effect {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: scale(0);
+      pointer-events: none;
+      z-index: 10;
+      animation: scale-up 0.5s ease-out;
+    }
+    
+    @keyframes scale-up {
+      0% {
+        transform: scale(0);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(3);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="text-white">
+  <div class="container mx-auto px-4 pt-6 pb-24">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">阅读挑战</h1>
+        <div class="text-blue-200 text-sm">伤寒论 · 第25章</div>
+      </div>
+      
+      <button onclick="navigateTo('challenges.html')" class="bg-white bg-opacity-20 rounded-full p-2 button-3d">
+        <i class="fas fa-times text-white"></i>
+      </button>
+    </div>
+    
+    <!-- 进度指示器 -->
+    <div class="progress-circles">
+      <div class="progress-circle active"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+    </div>
+    
+    <!-- 挑战卡片 -->
+    <div class="bg-white bg-opacity-20 backdrop-filter backdrop-blur-md rounded-xl p-6 mb-6">
+      <div class="text-center mb-6">
+        <div class="inline-block bg-blue-800 bg-opacity-50 rounded-full px-4 py-1 mb-4 text-sm">
+          <i class="fas fa-book-open mr-2"></i>阅读挑战
+        </div>
+        
+        <h2 class="text-lg font-bold mb-2">揭示并记忆文字内容</h2>
+        <p class="text-blue-200 text-sm">点击方块揭示文字，尝试记住内容</p>
+      </div>
+      
+      <!-- 阅读刮刮乐区域 -->
+      <div class="bg-black bg-opacity-20 rounded-xl p-6 mb-6">
+        <div class="scratch-area text-center" id="scratchArea">
+          <div class="flex flex-wrap justify-center">
+            <div class="character" data-char="伤">伤</div>
+            <div class="character" data-char="寒">寒</div>
+            <div class="character" data-char="论">论</div>
+            <div class="character" data-char="有">有</div>
+            <div class="character" data-char="持">持</div>
+            <div class="character" data-char="续">续</div>
+            <div class="character" data-char="发">发</div>
+            <div class="character" data-char="热">热</div>
+            <div class="character" data-char="五">五</div>
+            <div class="character" data-char="日">日</div>
+            <div class="character" data-char="，">，</div>
+          </div>
+          
+          <div class="flex flex-wrap justify-center mt-4">
+            <div class="character" data-char="脉">脉</div>
+            <div class="character" data-char="浮">浮</div>
+            <div class="character" data-char="紧">紧</div>
+            <div class="character" data-char="，">，</div>
+            <div class="character" data-char="头">头</div>
+            <div class="character" data-char="痛">痛</div>
+            <div class="character" data-char="。">。</div>
+          </div>
+          
+          <div class="flex flex-wrap justify-center mt-4">
+            <div class="character" data-char="第">第</div>
+            <div class="character" data-char="二">二</div>
+            <div class="character" data-char="十">十</div>
+            <div class="character" data-char="五">五</div>
+            <div class="character" data-char="章">章</div>
+            <div class="character" data-char="第">第</div>
+            <div class="character" data-char="二">二</div>
+            <div class="character" data-char="句">句</div>
+            <div class="character" data-char="：">：</div>
+          </div>
+          
+          <div class="flex flex-wrap justify-center mt-4">
+            <div class="character" data-char="给">给</div>
+            <div class="character" data-char="予">予</div>
+            <div class="character shine-effect" data-char="桂">桂</div>
+            <div class="character shine-effect" data-char="枝">枝</div>
+            <div class="character shine-effect" data-char="汤">汤</div>
+            <div class="character" data-char="治">治</div>
+            <div class="character" data-char="疗">疗</div>
+            <div class="character" data-char="。">。</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 按钮区域 -->
+      <div class="flex space-x-3">
+        <button id="revealAllButton" class="flex-1 bg-white bg-opacity-20 hover:bg-opacity-30 py-3 rounded-lg flex items-center justify-center button-3d">
+          <i class="fas fa-eye mr-2"></i>全部显示
+        </button>
+        
+        <button id="hideAllButton" class="flex-1 bg-white bg-opacity-20 hover:bg-opacity-30 py-3 rounded-lg flex items-center justify-center button-3d">
+          <i class="fas fa-eye-slash mr-2"></i>重新隐藏
+        </button>
+      </div>
+    </div>
+    
+    <!-- 下一步按钮 -->
+    <div class="flex space-x-4">
+      <button class="flex-1 bg-white bg-opacity-20 hover:bg-opacity-30 py-4 rounded-xl font-bold button-3d">
+        <i class="fas fa-redo mr-2"></i>重新开始
+      </button>
+      
+      <button class="flex-1 bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-bold button-3d">
+        <i class="fas fa-check mr-2"></i>我已记住
+      </button>
+    </div>
+    
+    <!-- 下方提示 -->
+    <div class="mt-6 text-center text-sm text-blue-200">
+      <p>完成5组阅读训练后解锁下一关</p>
+      <p class="mt-2">当前进度: 1/5</p>
+    </div>
+  </div>
+  
+  <script>
+    // 点击揭示字符
+    const scratchArea = document.getElementById('scratchArea');
+    const characters = document.querySelectorAll('.character');
+    const revealAllButton = document.getElementById('revealAllButton');
+    const hideAllButton = document.getElementById('hideAllButton');
+    
+    characters.forEach(char => {
+      char.addEventListener('click', function(e) {
+        // 创建点击效果
+        const effect = document.createElement('div');
+        effect.classList.add('reading-effect');
+        effect.style.left = (e.pageX - 15) + 'px';
+        effect.style.top = (e.pageY - 15) + 'px';
+        document.body.appendChild(effect);
+        
+        // 移除效果元素
+        setTimeout(() => {
+          document.body.removeChild(effect);
+        }, 500);
+        
+        // 揭示文字
+        this.classList.add('revealed');
+      });
+    });
+    
+    // 全部显示
+    revealAllButton.addEventListener('click', function() {
+      characters.forEach(char => {
+        char.classList.add('revealed');
+      });
+    });
+    
+    // 重新隐藏
+    hideAllButton.addEventListener('click', function() {
+      characters.forEach(char => {
+        char.classList.remove('revealed');
+      });
+    });
+    
+    function navigateTo(route) {
+      if (window.parent && window.parent.postMessage) {
+        window.parent.postMessage({ route: route }, '*');
+      } else {
+        window.location.href = route;
+      }
+    }
+  </script>
+</body>
+</html>
+

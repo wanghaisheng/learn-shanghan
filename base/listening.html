@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>听力挑战</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #C53030 0%, #E53E3E 100%);
+      background-attachment: fixed;
+      padding-bottom: 90px;
+    }
+    
+    @keyframes wave {
+      0% {
+        height: 5px;
+      }
+      50% {
+        height: 20px;
+      }
+      100% {
+        height: 5px;
+      }
+    }
+    
+    .audio-wave {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+    }
+    
+    .audio-wave .bar {
+      width: 4px;
+      margin: 0 2px;
+      border-radius: 2px;
+      background-color: white;
+      animation: wave 0.5s infinite;
+    }
+    
+    .audio-wave .bar:nth-child(1) { animation-delay: 0.1s; }
+    .audio-wave .bar:nth-child(2) { animation-delay: 0.2s; }
+    .audio-wave .bar:nth-child(3) { animation-delay: 0.3s; }
+    .audio-wave .bar:nth-child(4) { animation-delay: 0.4s; }
+    .audio-wave .bar:nth-child(5) { animation-delay: 0.5s; }
+    .audio-wave .bar:nth-child(6) { animation-delay: 0.4s; }
+    .audio-wave .bar:nth-child(7) { animation-delay: 0.3s; }
+    .audio-wave .bar:nth-child(8) { animation-delay: 0.2s; }
+    .audio-wave .bar:nth-child(9) { animation-delay: 0.1s; }
+    
+    .audio-wave.paused .bar {
+      animation-play-state: paused;
+      height: 5px;
+    }
+    
+    .button-3d {
+      box-shadow: 0 4px 0 #b91c1c;
+      transform: translateY(-4px);
+      transition: all 0.1s;
+    }
+    
+    .button-3d:active {
+      box-shadow: 0 0 0 #b91c1c;
+      transform: translateY(0);
+    }
+    
+    .pinyin {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      display: block;
+      margin-bottom: 2px;
+    }
+    
+    .text-character {
+      font-size: 22px;
+      line-height: 1.5;
+      letter-spacing: 2px;
+    }
+    
+    .character-highlight {
+      color: #FBBF24;
+      text-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+    }
+    
+    .progress-circles {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    
+    .progress-circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin: 0 3px;
+    }
+    
+    .progress-circle.active {
+      background-color: white;
+      box-shadow: 0 0 5px white;
+    }
+  </style>
+</head>
+<body class="text-white">
+  <div class="container mx-auto px-4 pt-6 pb-24">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">听力挑战</h1>
+        <div class="text-red-200 text-sm">伤寒论 · 第25章</div>
+      </div>
+      
+      <button onclick="navigateTo('challenges.html')" class="bg-white bg-opacity-20 rounded-full p-2 button-3d">
+        <i class="fas fa-times text-white"></i>
+      </button>
+    </div>
+    
+    <!-- 进度指示器 -->
+    <div class="progress-circles">
+      <div class="progress-circle active"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+    </div>
+    
+    <!-- 挑战卡片 -->
+    <div class="bg-white bg-opacity-20 backdrop-filter backdrop-blur-md rounded-xl p-6 mb-6">
+      <div class="text-center mb-8">
+        <div class="inline-block bg-red-800 bg-opacity-50 rounded-full px-4 py-1 mb-4 text-sm">
+          <i class="fas fa-headphones mr-2"></i>听力挑战
+        </div>
+        
+        <h2 class="text-lg font-bold mb-2">仔细聆听并记忆以下内容</h2>
+        <p class="text-red-200 text-sm">点击播放按钮听取内容，带有拼音提示</p>
+      </div>
+      
+      <!-- 音频播放器 -->
+      <div class="mb-8">
+        <div class="audio-wave paused mb-6" id="audioWave">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        
+        <div class="flex justify-center space-x-4">
+          <button class="w-16 h-16 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full flex items-center justify-center button-3d">
+            <i class="fas fa-step-backward text-xl"></i>
+          </button>
+          
+          <button id="playButton" class="w-20 h-20 bg-red-600 hover:bg-red-500 rounded-full flex items-center justify-center shadow-lg button-3d">
+            <i class="fas fa-play text-2xl" id="playIcon"></i>
+          </button>
+          
+          <button class="w-16 h-16 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full flex items-center justify-center button-3d">
+            <i class="fas fa-step-forward text-xl"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- 文本区域带拼音 -->
+      <div class="bg-black bg-opacity-20 rounded-xl p-4 mb-4">
+        <div class="text-center">
+          <div class="mb-4">
+            <span class="pinyin">shāng hán lùn</span>
+            <span class="text-character">伤寒论</span>
+          </div>
+          
+          <div class="mb-4">
+            <span class="pinyin">yǒu chī rè bìng wǔ rì , mǎi tóu xiān téng tòng</span>
+            <span class="text-character">有持续发热五日，脉浮紧，头痛</span>
+          </div>
+          
+          <div class="mb-4">
+            <span class="pinyin">èr shí wǔ zhāng dì èr jù</span>
+            <span class="text-character">第二十五章第二句</span>
+          </div>
+          
+          <div>
+            <span class="pinyin">gěi yǔ guì zhī tāng zhì liáo</span>
+            <span class="text-character">给予<span class="character-highlight">桂枝汤</span>治疗</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 按钮区 -->
+      <div class="flex space-x-3">
+        <button class="flex-1 bg-white bg-opacity-20 hover:bg-opacity-30 py-3 rounded-lg flex items-center justify-center">
+          <i class="fas fa-redo mr-2"></i>重复
+        </button>
+        
+        <button class="flex-1 bg-white bg-opacity-20 hover:bg-opacity-30 py-3 rounded-lg flex items-center justify-center">
+          <i class="fas fa-volume-down mr-2"></i>减速
+        </button>
+        
+        <button class="flex-1 bg-white bg-opacity-20 hover:bg-opacity-30 py-3 rounded-lg flex items-center justify-center">
+          <i class="fas fa-info-circle mr-2"></i>提示
+        </button>
+      </div>
+    </div>
+    
+    <!-- 下一步按钮 -->
+    <div class="flex space-x-4">
+      <button class="flex-1 bg-white bg-opacity-20 hover:bg-opacity-30 py-4 rounded-xl font-bold button-3d">
+        <i class="fas fa-redo mr-2"></i>再听一次
+      </button>
+      
+      <button class="flex-1 bg-red-600 hover:bg-red-500 py-4 rounded-xl font-bold button-3d">
+        <i class="fas fa-check mr-2"></i>我已记住
+      </button>
+    </div>
+    
+    <!-- 下方提示 -->
+    <div class="mt-6 text-center text-sm text-red-200">
+      <p>完成5组听力训练后解锁下一关</p>
+      <p class="mt-2">当前进度: 1/5</p>
+    </div>
+  </div>
+  
+  <script>
+    // 音频播放控制
+    const playButton = document.getElementById('playButton');
+    const playIcon = document.getElementById('playIcon');
+    const audioWave = document.getElementById('audioWave');
+    let isPlaying = false;
+    
+    playButton.addEventListener('click', function() {
+      isPlaying = !isPlaying;
+      
+      if (isPlaying) {
+        playIcon.classList.remove('fa-play');
+        playIcon.classList.add('fa-pause');
+        audioWave.classList.remove('paused');
+      } else {
+        playIcon.classList.remove('fa-pause');
+        playIcon.classList.add('fa-play');
+        audioWave.classList.add('paused');
+      }
+    });
+    
+    function navigateTo(route) {
+      if (window.parent && window.parent.postMessage) {
+        window.parent.postMessage({ route: route }, '*');
+      } else {
+        window.location.href = route;
+      }
+    }
+  </script>
+</body>
+</html>
+

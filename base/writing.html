@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>写作挑战</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
+      background-attachment: fixed;
+      padding-bottom: 90px;
+    }
+    
+    .input-box {
+      width: 1.8em;
+      height: 1.8em;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0.2em;
+      font-size: 1.2em;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .input-box.filled {
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #D97706;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    
+    .input-box.correct {
+      background-color: rgba(16, 185, 129, 0.8);
+      border-color: #059669;
+      color: white;
+    }
+    
+    .input-box.wrong {
+      background-color: rgba(239, 68, 68, 0.8);
+      border-color: #DC2626;
+      color: white;
+    }
+    
+    .highlight {
+      background-color: rgba(234, 179, 8, 0.3);
+      border-radius: 4px;
+      padding: 0 0.2em;
+    }
+    
+    .button-3d {
+      box-shadow: 0 4px 0 #B45309;
+      transform: translateY(-4px);
+      transition: all 0.1s;
+    }
+    
+    .button-3d:active {
+      box-shadow: 0 0 0 #B45309;
+      transform: translateY(0);
+    }
+    
+    .keyboard {
+      padding: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      user-select: none;
+    }
+    
+    .keyboard-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+    
+    .key {
+      width: 36px;
+      height: 36px;
+      margin: 2px;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #4B5563;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+    
+    .key:active {
+      transform: scale(0.95);
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .key.special {
+      width: 50px;
+      font-size: 18px;
+    }
+    
+    .key.wide {
+      width: 70px;
+    }
+    
+    .progress-circles {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
+    
+    .progress-circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin: 0 3px;
+    }
+    
+    .progress-circle.active {
+      background-color: white;
+      box-shadow: 0 0 5px white;
+    }
+    
+    @keyframes sparkle {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) rotate(0deg);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(180deg);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.8) rotate(360deg);
+      }
+    }
+    
+    .sparkle {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body class="text-white">
+  <div class="container mx-auto px-4 pt-6 pb-24">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">写作挑战</h1>
+        <div class="text-yellow-200 text-sm">伤寒论 · 第25章</div>
+      </div>
+      
+      <button onclick="navigateTo('challenges.html')" class="bg-white bg-opacity-20 rounded-full p-2 button-3d">
+        <i class="fas fa-times text-white"></i>
+      </button>
+    </div>
+    
+    <!-- 进度指示器 -->
+    <div class="progress-circles">
+      <div class="progress-circle active"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+      <div class="progress-circle"></div>
+    </div>
+    
+    <!-- 挑战卡片 -->
+    <div class="bg-white bg-opacity-20 backdrop-filter backdrop-blur-md rounded-xl p-6 mb-6">
+      <div class="text-center mb-6">
+        <div class="inline-block bg-yellow-800 bg-opacity-50 rounded-full px-4 py-1 mb-4 text-sm">
+          <i class="fas fa-pen mr-2"></i>写作挑战
+        </div>
+        
+        <h2 class="text-lg font-bold mb-2">输入缺失文字内容</h2>
+        <p class="text-yellow-200 text-sm">根据记忆填写空缺的文字</p>
+      </div>
+      
+      <!-- 填空区域 -->
+      <div class="bg-black bg-opacity-20 rounded-xl p-4 mb-6">
+        <div class="text-center text-lg leading-relaxed">
+          <div class="mb-4">
+            <span>伤寒论有持续发热五日，</span>
+            <span class="input-box" id="box1" data-answer="脉"></span>
+            <span class="input-box" id="box2" data-answer="浮"></span>
+            <span class="input-box" id="box3" data-answer="紧"></span>
+            <span>，头痛。</span>
+          </div>
+          
+          <div class="mb-4">
+            <span>第</span>
+            <span class="input-box" id="box4" data-answer="二"></span>
+            <span class="input-box" id="box5" data-answer="十"></span>
+            <span class="input-box" id="box6" data-answer="五"></span>
+            <span>章第二句：</span>
+          </div>
+          
+          <div>
+            <span>给予</span>
+            <span class="input-box highlight" id="box7" data-answer="桂"></span>
+            <span class="input-box highlight" id="box8" data-answer="枝"></span>
+            <span class="input-box highlight" id="box9" data-answer="汤"></span>
+            <span>治疗。</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 虚拟键盘 -->
+      <div class="keyboard">
+        <div class="keyboard-row">
+          <div class="key" data-char="伤">伤</div>
+          <div class="key" data-char="寒">寒</div>
+          <div class="key" data-char="论">论</div>
+          <div class="key" data-char="持">持</div>
+          <div class="key" data-char="续">续</div>
+          <div class="key" data-char="发">发</div>
+          <div class="key" data-char="热">热</div>
+          <div class="key" data-char="日">日</div>
+        </div>
+        
+        <div class="keyboard-row">
+          <div class="key" data-char="脉">脉</div>
+          <div class="key" data-char="浮">浮</div>
+          <div class="key" data-char="紧">紧</div>
+          <div class="key" data-char="头">头</div>
+          <div class="key" data-char="痛">痛</div>
+          <div class="key" data-char="第">第</div>
+          <div class="key" data-char="二">二</div>
+          <div class="key" data-char="十">十</div>
+        </div>
+        
+        <div class="keyboard-row">
+          <div class="key" data-char="五">五</div>
+          <div class="key" data-char="章">章</div>
+          <div class="key" data-char="句">句</div>
+          <div class="key" data-char="给">给</div>
+          <div class="key" data-char="予">予</div>
+          <div class="key" data-char="桂">桂</div>
+          <div class="key" data-char="枝">枝</div>
+          <div class="key" data-char="汤">汤</div>
+        </div>
+        
+        <div class="keyboard-row">
+          <div class="key" data-char="治">治</div>
+          <div class="key" data-char="疗">疗</div>
+          <div class="key" data-char="。">。</div>
+          <div class="key" data-char="，">，</div>
+          <div class="key" data-char="：">：</div>
+          <div class="key special" id="backspaceKey"><i class="fas fa-backspace"></i></div>
+          <div class="key wide" id="checkAnswerKey">检查</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 下一步按钮 -->
+    <div class="flex space-x-4">
+      <button class="flex-1 bg-white bg-opacity-20 hover:bg-opacity-30 py-4 rounded-xl font-bold button-3d">
+        <i class="fas fa-redo mr-2"></i>重新开始
+      </button>
+      
+      <button class="flex-1 bg-yellow-600 hover:bg-yellow-500 py-4 rounded-xl font-bold button-3d">
+        <i class="fas fa-arrow-right mr-2"></i>下一题
+      </button>
+    </div>
+    
+    <!-- 下方提示 -->
+    <div class="mt-6 text-center text-sm text-yellow-200">
+      <p>完成5组写作训练后解锁下一关</p>
+      <p class="mt-2">当前进度: 1/5</p>
+    </div>
+  </div>
+  
+  <script>
+    // 输入框管理
+    const inputBoxes = document.querySelectorAll('.input-box');
+    const keys = document.querySelectorAll('.key:not(.special):not(.wide)');
+    const backspaceKey = document.getElementById('backspaceKey');
+    const checkAnswerKey = document.getElementById('checkAnswerKey');
+    
+    let currentBox = null;
+    
+    // 设置第一个输入框为初始焦点
+    inputBoxes[0].style.boxShadow = '0 0 5px 2px rgba(255, 255, 255, 0.8)';
+    currentBox = inputBoxes[0];
+    
+    // 点击输入框
+    inputBoxes.forEach(box => {
+      box.addEventListener('click', function() {
+        // 移除之前的焦点
+        if (currentBox) {
+          currentBox.style.boxShadow = '';
+        }
+        
+        // 设置新焦点
+        this.style.boxShadow = '0 0 5px 2px rgba(255, 255, 255, 0.8)';
+        currentBox = this;
+      });
+    });
+    
+    // 按键输入
+    keys.forEach(key => {
+      key.addEventListener('click', function() {
+        if (currentBox) {
+          const char = this.getAttribute('data-char');
+          currentBox.textContent = char;
+          currentBox.classList.add('filled');
+          
+          // 自动移动到下一个输入框
+          const currentIndex = Array.from(inputBoxes).indexOf(currentBox);
+          if (currentIndex < inputBoxes.length - 1) {
+            currentBox.style.boxShadow = '';
+            currentBox = inputBoxes[currentIndex + 1];
+            currentBox.style.boxShadow = '0 0 5px 2px rgba(255, 255, 255, 0.8)';
+          }
+        }
+      });
+    });
+    
+    // 退格键
+    backspaceKey.addEventListener('click', function() {
+      if (currentBox && currentBox.textContent.trim() !== '') {
+        currentBox.textContent = '';
+        currentBox.classList.remove('filled');
+        currentBox.classList.remove('correct');
+        currentBox.classList.remove('wrong');
+      } else {
+        // 如果当前框为空，回到上一个框
+        const currentIndex = Array.from(inputBoxes).indexOf(currentBox);
+        if (currentIndex > 0) {
+          currentBox.style.boxShadow = '';
+          currentBox = inputBoxes[currentIndex - 1];
+          currentBox.style.boxShadow = '0 0 5px 2px rgba(255, 255, 255, 0.8)';
+          currentBox.textContent = '';
+          currentBox.classList.remove('filled');
+          currentBox.classList.remove('correct');
+          currentBox.classList.remove('wrong');
+        }
+      }
+    });
+    
+    // 检查答案
+    checkAnswerKey.addEventListener('click', function() {
+      let allCorrect = true;
+      
+      inputBoxes.forEach(box => {
+        const answer = box.getAttribute('data-answer');
+        const userInput = box.textContent;
+        
+        if (userInput === answer) {
+          box.classList.remove('wrong');
+          box.classList.add('correct');
+          
+          // 创建星星特效
+          createSparkle(box);
+        } else {
+          box.classList.remove('correct');
+          box.classList.add('wrong');
+          allCorrect = false;
+        }
+      });
+      
+      if (allCorrect) {
+        // 全部正确的效果
+        setTimeout(() => {
+          alert('恭喜！所有答案正确！');
+        }, 500);
+      }
+    });
+    
+    // 创建星星特效
+    function createSparkle(element) {
+      const rect = element.getBoundingClientRect();
+      const sparkle = document.createElement('div');
+      sparkle.innerHTML = '<svg viewBox="0 0 24 24" width="100%" height="100%"><path fill="gold" d="M12,1L15.36,9.94L22,9.92L17.58,14.47L19.25,22.31L12,18.47L4.75,22.31L6.42,14.47L2,9.92L8.64,9.94L12,1Z" /></svg>';
+      sparkle.classList.add('sparkle');
+      
+      sparkle.style.left = (rect.left + rect.width / 2 - 10) + 'px';
+      sparkle.style.top = (rect.top + rect.height / 2 - 10) + 'px';
+      sparkle.style.animation = `sparkle ${0.5 + Math.random() * 0.5}s forwards`;
+      
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => {
+        document.body.removeChild(sparkle);
+      }, 1000);
+    }
+    
+    function navigateTo(route) {
+      if (window.parent && window.parent.postMessage) {
+        window.parent.postMessage({ route: route }, '*');
+      } else {
+        window.location.href = route;
+      }
+    }
+  </script>
+</body>
+</html>
+

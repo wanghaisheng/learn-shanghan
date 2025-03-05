@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>语言学习游戏</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background-color: #202020;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .phone-container {
+      width: 375px;
+      height: 812px;
+      background-color: white;
+      border-radius: 40px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .status-bar {
+      height: 44px;
+      background-color: #000;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+    
+    .app-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .back-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-button bg-white text-gray-800 font-bold py-2 px-4 rounded-full shadow-lg hover:bg-gray-200">
+    <i class="fas fa-arrow-left mr-2"></i>返回原型预览
+  </a>
+  
+  <div class="phone-container">
+    <div class="status-bar">
+      <div>9:41</div>
+      <div class="flex items-center">
+        <i class="fas fa-signal mr-2"></i>
+        <i class="fas fa-wifi mr-2"></i>
+        <i class="fas fa-battery-full"></i>
+      </div>
+    </div>
+    <iframe src="home.html" class="app-frame" id="appFrame" style="margin-top: 44px; height: calc(100% - 44px);"></iframe>
+  </div>
+  
+  <script>
+    // 简单的路由系统，用于在iframe中切换页面
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.route) {
+        document.getElementById('appFrame').src = event.data.route;
+      }
+    });
+  </script>
+</body>
+</html>
+
