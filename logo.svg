@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="50" height="50">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8A2387"/>
+      <stop offset="50%" stop-color="#E94057"/>
+      <stop offset="100%" stop-color="#F27121"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="90" fill="url(#logoGradient)" />
+  <g fill="white">
+    <!-- Listen icon -->
+    <path d="M70 70 C70 60, 90 60, 90 70 L90 100 C90 110, 70 110, 70 100 Z" stroke="white" stroke-width="2"/>
+    <path d="M60 95 Q60 120, 80 125 L80 115 Q70 113, 70 95 Z" />
+    <path d="M100 95 Q100 120, 80 125 L80 115 Q90 113, 90 95 Z" />
+    
+    <!-- Speak icon -->
+    <path d="M120 70 C120 60, 130 65, 125 75 Q140 85, 130 100 C125 105, 115 90, 120 85 Z" />
+    
+    <!-- Read icon -->
+    <path d="M50 130 L90 130 L90 140 L50 140 Z" />
+    <path d="M60 142 L80 142 L80 147 L60 147 Z" />
+    <path d="M65 149 L75 149 L75 152 L65 152 Z" />
+    
+    <!-- Write icon -->
+    <path d="M110 130 L115 130 L125 150 L120 150 Z" />
+    <path d="M128 125 C140 120, 145 135, 135 145 L125 150 L120 135 Z" />
+  </g>
+  <!-- Chinese character 伤 simplified sketch -->
+  <path d="M100 100 Q110 90, 120 100 L115 105 Q108 100, 105 103 L110 110 L100 115 L105 105 Q95 110, 90 100 L95 95 Q100 100, 105 95 Z" fill="white" opacity="0.7"/>
+</svg>

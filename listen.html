@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="listen.title">听力模式 - 听说读写学伤寒</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F7F8FC;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .play-button {
+            background: linear-gradient(135deg, #8A2387, #E94057, #F27121);
+            box-shadow: 0 10px 15px -3px rgba(233, 64, 87, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .pinyin {
+            font-size: 12px;
+            color: #6366F1;
+            line-height: 1;
+        }
+        
+        .character {
+            font-size: 22px;
+            margin: 5px 0;
+            font-weight: 500;
+        }
+        
+        .character-card {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 5px;
+            border-radius: 8px;
+            padding: 5px 10px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            min-width: 40px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #E2E8F0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8A2387, #E94057, #F27121);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .audio-controls button {
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        
+        .audio-controls .play-pause {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #8A2387, #E94057, #F27121);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content pb-20">
+        <!-- 顶部导航 -->
+        <div class="bg-white p-4 shadow-sm sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <button class="p-2">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <div class="text-center">
+                    <h1 class="text-lg font-bold text-gray-800" data-i18n="listen.mode">听力模式</h1>
+                    <p class="text-sm text-gray-500">《伤寒杂病论》- 平脉法第一 (1.1)</p>
+                </div>
+                <button class="p-2">
+                    <i class="fas fa-ellipsis-v text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="p-4">
+            <!-- 进度显示 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm font-medium text-gray-800" data-i18n="listen.progress">今日进度</span>
+                    <span class="text-sm text-purple-600">16/150字</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 10%;"></div>
+                </div>
+            </div>
+            
+            <!-- 音频控制区 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <div class="text-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" class="h-24 mx-auto">
+                        <rect width="240" height="120" fill="transparent"/>
+                        <path d="M10,60 L20,30 L30,60 L40,90 L50,20 L60,60 L70,40 L80,60 L90,50 L100,60 L110,10 L120,60 L130,80 L140,60 L150,70 L160,60 L170,30 L180,60 L190,40 L200,60 L210,80 L220,60 L230,70" 
+                              stroke="#8A2387" stroke-width="2" fill="none"/>
+                    </svg>
+                </div>
+                
+                <div class="audio-controls">
+                    <button>
+                        <i class="fas fa-step-backward text-gray-600"></i>
+                    </button>
+                    <button>
+                        <i class="fas fa-backward text-gray-600"></i>
+                    </button>
+                    <button class="play-pause">
+                        <i class="fas fa-play text-white text-xl"></i>
+                    </button>
+                    <button>
+                        <i class="fas fa-forward text-gray-600"></i>
+                    </button>
+                    <button>
+                        <i class="fas fa-step-forward text-gray-600"></i>
+                    </button>
+                </div>
+                
+                <div class="flex justify-between mt-5">
+                    <span class="text-sm text-gray-500">00:00</span>
+                    <span class="text-sm text-gray-500">01:30</span>
+                </div>
+                
+                <div class="progress-bar mt-2">
+                    <div class="progress-bar-fill" style="width: 30%;"></div>
+                </div>
+                
+                <div class="flex justify-center mt-5">
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-l-lg">
+                        <i class="fas fa-volume-down mr-1"></i>
+                        0.75x
+                    </button>
+                    <button class="px-4 py-2 bg-purple-100 text-purple-700 font-medium">
+                        1.0x
+                    </button>
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-r-lg">
+                        <i class="fas fa-volume-up mr-1"></i>
+                        1.5x
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 文本显示区 -->
+            <div class="bg-white rounded-xl shadow-sm p-5">
+                <h3 class="font-bold text-gray-800 mb-4">平脉法第一</h3>
+                
+                <div class="text-center mb-6">
+                    <div class="character-card">
+                        <span class="pinyin">xìng</span>
+                        <span class="character">形</span>
+                    </div>
+                    <div class="character-card">
+                        <span class="pinyin">sè</span>
+                        <span class="character">色</span>
+                    </div>
+                    <div class="character-card">
+                        <span class="pinyin">qì</span>
+                        <span class="character">气</span>
+                    </div>
+                    <div class="character-card">
+                        <span class="pinyin">wèi</span>
+                        <span class="character">味</span>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="character-card">
+                        <span class="pinyin">zhǎng</span>
+                        <span class="character">脹</span>
+                    </div>
+                    <div class="character-card">
+                        <span class="pinyin">dà</span>
+                        <span class="character">大</span>
+                    </div>
+                    <div class="character-card">
+                        <span class="pinyin">zì</span>
+                        <span class="character">自</span>
+                    </div>
+                    <div class="character-card">
+                        <span class="pinyin">líng</span>
+                        <span class="character">靈</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end mt-8">
+                    <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg mr-3" data-i18n="listen.repeat">
+                        <i class="fas fa-redo mr-1"></i>
+                        重听
+                    </button>
+                    <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium" data-i18n="listen.continue">
+                        继续
+                        <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar py-2 px-4">
+        <div class="flex justify-around items-center">
+            <div class="flex flex-col items-center">
+                <i class="fas fa-home text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.home">首页</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-book text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.books">书籍</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
+                    <i class="fas fa-play text-white text-lg"></i>
+                </div>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.practice">学习</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-trophy text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.achievements">成就</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.profile">我的</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 语言切换功能
+        let currentLanguage = 'zh';
+        let translations = {};
+        
+        async function loadTranslations(lang) {
+            try {
+                const response = await fetch(`${lang}.json`);
+                translations = await response.json();
+                updatePageContent();
+            } catch (error) {
+                console.error('Failed to load translations:', error);
+            }
+        }
+        
+        function updatePageContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[key]) {
+                    element.textContent = translations[key];
+                }
+            });
+        }
+        
+        // 初始加载
+        loadTranslations(currentLanguage);
+        
+        // 播放按钮切换效果
+        const playPauseButton = document.querySelector('.play-pause');
+        const playPauseIcon = playPauseButton.querySelector('i');
+        let isPlaying = false;
+        
+        playPauseButton.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                playPauseIcon.classList.remove('fa-play');
+                playPauseIcon.classList.add('fa-pause');
+            } else {
+                playPauseIcon.classList.remove('fa-pause');
+                playPauseIcon.classList.add('fa-play');
+            }
+        });
+    </script>
+</body>
+</html>

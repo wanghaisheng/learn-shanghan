@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="speak.title">口语模式 - 听说读写学伤寒</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F7F8FC;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #E2E8F0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8A2387, #E94057, #F27121);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .record-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8A2387, #E94057, #F27121);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 15px -3px rgba(233, 64, 87, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .record-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .recording-waves {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+        }
+        
+        .recording-waves .wave {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(233, 64, 87, 0.3);
+            animation: wave 2s linear infinite;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .recording-waves .wave:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            animation-delay: 0s;
+        }
+        
+        .recording-waves .wave:nth-child(2) {
+            width: 140px;
+            height: 140px;
+            animation-delay: 0.3s;
+        }
+        
+        .recording-waves .wave:nth-child(3) {
+            width: 180px;
+            height: 180px;
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes wave {
+            0% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+        
+        .result-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .similarity-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #E2E8F0;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        
+        .similarity-fill {
+            height: 100%;
+            background-color: #4ADE80;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content pb-20">
+        <!-- 顶部导航 -->
+        <div class="bg-white p-4 shadow-sm sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <button class="p-2">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <div class="text-center">
+                    <h1 class="text-lg font-bold text-gray-800" data-i18n="speak.mode">口语模式</h1>
+                    <p class="text-sm text-gray-500">《伤寒杂病论》- 平脉法第一 (1.1)</p>
+                </div>
+                <button class="p-2">
+                    <i class="fas fa-ellipsis-v text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="p-4">
+            <!-- 进度显示 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm font-medium text-gray-800" data-i18n="speak.progress">今日进度</span>
+                    <span class="text-sm text-purple-600">32/150字</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 20%;"></div>
+                </div>
+            </div>
+            
+            <!-- 文本显示区 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <h3 class="font-bold text-gray-800 mb-4">平脉法第一</h3>
+                <p class="text-gray-800 text-lg leading-relaxed">形色气味，脹大自靈，脈有三部，闔以候人</p>
+                <div class="flex justify-end mt-4">
+                    <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg" data-i18n="speak.listen">
+                        <i class="fas fa-volume-up mr-1"></i>
+                        听原文
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 录音区域 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6 relative">
+                <h3 class="font-bold text-gray-800 mb-4 text-center" data-i18n="speak.instruction">点击下方按钮开始朗读</h3>
+                
+                <div class="flex justify-center relative" style="height: 120px;">
+                    <div class="recording-waves" style="display: none;">
+                        <div class="wave"></div>
+                        <div class="wave"></div>
+                        <div class="wave"></div>
+                    </div>
+                    <button class="record-button">
+                        <i class="fas fa-microphone text-xl"></i>
+                    </button>
+                </div>
+                
+                <p class="text-center text-sm text-gray-500 mt-4" data-i18n="speak.tip">请清晰地朗读上方文字，尽量匹配原文发音</p>
+            </div>
+            
+            <!-- 识别结果 -->
+            <div class="result-card">
+                <h3 class="font-bold text-gray-800 mb-2" data-i18n="speak.recognitionResult">识别结果</h3>
+                <p class="text-gray-700">形色气味，脹大自靈，脈有三部，闔以候人</p>
+                
+                <div class="mt-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm text-gray-600" data-i18n="speak.accuracy">准确度</span>
+                        <span class="text-sm font-medium text-green-600">92%</span>
+                    </div>
+                    <div class="similarity-bar">
+                        <div class="similarity-fill" style="width: 92%;"></div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-between">
+                    <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg" data-i18n="speak.tryAgain">
+                        <i class="fas fa-redo mr-1"></i>
+                        重新录制
+                    </button>
+                    <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium" data-i18n="speak.continue">
+                        继续
+                        <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar py-2 px-4">
+        <div class="flex justify-around items-center">
+            <div class="flex flex-col items-center">
+                <i class="fas fa-home text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.home">首页</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-book text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.books">书籍</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
+                    <i class="fas fa-play text-white text-lg"></i>
+                </div>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.practice">学习</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-trophy text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.achievements">成就</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.profile">我的</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 语言切换功能
+        let currentLanguage = 'zh';
+        let translations = {};
+        
+        async function loadTranslations(lang) {
+            try {
+                const response = await fetch(`${lang}.json`);
+                translations = await response.json();
+                updatePageContent();
+            } catch (error) {
+                console.error('Failed to load translations:', error);
+            }
+        }
+        
+        function updatePageContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[key]) {
+                    element.textContent = translations[key];
+                }
+            });
+        }
+        
+        // 初始加载
+        loadTranslations(currentLanguage);
+        
+        // 录音按钮效果
+        const recordButton = document.querySelector('.record-button');
+        const recordIcon = recordButton.querySelector('i');
+        const recordingWaves = document.querySelector('.recording-waves');
+        const resultCard = document.querySelector('.result-card');
+        let isRecording = false;
+        
+        resultCard.style.display = 'none';
+        
+        recordButton.addEventListener('click', () => {
+            isRecording = !isRecording;
+            
+            if (isRecording) {
+                recordIcon.classList.remove('fa-microphone');
+                recordIcon.classList.add('fa-stop');
+                recordingWaves.style.display = 'block';
+                resultCard.style.display = 'none';
+                
+                // 模拟3秒后自动停止录音并显示结果
+                setTimeout(() => {
+                    isRecording = false;
+                    recordIcon.classList.remove('fa-stop');
+                    recordIcon.classList.add('fa-microphone');
+                    recordingWaves.style.display = 'none';
+                    resultCard.style.display = 'block';
+                }, 3000);
+                
+            } else {
+                recordIcon.classList.remove('fa-stop');
+                recordIcon.classList.add('fa-microphone');
+                recordingWaves.style.display = 'none';
+                resultCard.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

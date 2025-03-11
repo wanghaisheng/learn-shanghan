@@ -1,132 +1,1248 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta name="keywords" content="mobile, simulator, mobile design, mobile app">
-  <meta name="author" content="Your Name or Company">
-  <meta http-equiv="Content-Language" content="en">
-
-  <!-- Canonical Link -->
-  <link rel="canonical" href="https://www.yourwebsite.com/pc-simulator" />
-
-  <!-- Open Graph for Social Media -->
-  <meta property="og:title" content="PC Simulator">
-  <meta property="og:description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta property="og:image" content="https://www.yourwebsite.com/pc-simulator-image.jpg">
-  <meta property="og:url" content="https://www.yourwebsite.com/pc-simulator">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PC Simulator">
-  <meta name="twitter:description" content="A mobile simulator designed to demonstrate mobile interface design.">
-  <meta name="twitter:image" content="https://www.yourwebsite.com/pc-simulator-image.jpg">
-  <meta name="twitter:creator" content="@yourtwitterhandle">
-
-  <!-- Favicon -->
-  <link rel="icon" href="https://www.yourwebsite.com/favicon.ico" type="image/x-icon">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-XXXXX-Y');
-  </script>
-
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y) {
-      window.clarity=window.clarity||function(){(clarity.q=clarity.q||[]).push(arguments)};
-      clarity('set', 'anonymizeIP', true);
-      i=l.createElement('script');i.async=1;i.src=r;i.type='text/javascript';
-      t=l.getElementsByTagName('script')[0];t.parentNode.insertBefore(i,t);
-    })(document,window,'script','https://www.clarity.ms/tag/XXXXXX');
-  </script>
-
-  <title>PC Simulator</title>
-
-  <style>
-    /* Global Styles */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    .mobile-container {
-      width: 360px;
-      height: 640px;
-      border: 16px solid black;
-      border-radius: 16px;
-      background-color: #fff;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .content {
-      font-size: 1.2rem;
-      color: #333;
-    }
-
-    /* Adjustments for PC */
-    @media (min-width: 768px) {
-      .mobile-container {
-        width: 600px;
-        height: 1000px;
-      }
-
-      .content {
-        font-size: 1.5rem;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .mobile-container {
-        width: 800px;
-        height: 1400px;
-      }
-
-      .content {
-        font-size: 1.8rem;
-      }
-    }
-
-    /* Additional responsiveness for larger screens */
-    @media (min-width: 1200px) {
-      body {
-        justify-content: flex-start;
-      }
-
-      .mobile-container {
-        margin-top: 50px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="app.title">听说读写学伤寒 - 中医经典学习新方式</title>
+    <meta name="description" content="通过听说读写四种模式，轻松掌握《伤寒杂病论》等中医经典，提升记忆效率和学习体验。">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #8A2387, #E94057, #F27121);
+        }
+        
+        .cta-button {
+            background: linear-gradient(90deg, #FF416C, #FF4B2B);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 65, 108, 0.3);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .phone-mockup {
+            position: relative;
+            width: 280px;
+            height: 580px;
+            background: #1A1A1A;
+            border-radius: 36px;
+            padding: 10px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 560px;
+            background: #FFFFFF;
+            border-radius: 28px;
+            overflow: hidden;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: white;
+        }
+        
+        .phone-iframe {
+            width: 100%;
+            height: calc(100% - 44px);
+            border: none;
+        }
+        
+        .animated-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .waiting-list-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .language-selector {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
 </head>
-
-<body>
-  <div class="mobile-container">
-    <div class="content">
-      <p>Mobile Simulator Screen</p>
-      <p>PC Version: Adjusted for larger screens.</p>
+<body class="bg-gray-50">
+    <!-- 语言选择器 -->
+    <div class="language-selector">
+        <select id="language-select" class="bg-white rounded-lg shadow-md px-4 py-2 focus:outline-none">
+            <option value="zh" selected>中文</option>
+            <option value="en">English</option>
+        </select>
     </div>
-  </div>
-</body>
 
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="40" height="40">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#8A2387"/>
+                            <stop offset="50%" stop-color="#E94057"/>
+                            <stop offset="100%" stop-color="#F27121"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="100" cy="100" r="90" fill="url(#logoGradient)" />
+                    <g fill="white">
+                        <!-- Listen icon -->
+                        <path d="M70 70 C70 60, 90 60, 90 70 L90 100 C90 110, 70 110, 70 100 Z" stroke="white" stroke-width="2"/>
+                        <path d="M60 95 Q60 120, 80 125 L80 115 Q70 113, 70 95 Z" />
+                        <path d="M100 95 Q100 120, 80 125 L80 115 Q90 113, 90 95 Z" />
+                        
+                        <!-- Speak icon -->
+                        <path d="M120 70 C120 60, 130 65, 125 75 Q140 85, 130 100 C125 105, 115 90, 120 85 Z" />
+                        
+                        <!-- Read icon -->
+                        <path d="M50 130 L90 130 L90 140 L50 140 Z" />
+                        <path d="M60 142 L80 142 L80 147 L60 147 Z" />
+                        <path d="M65 149 L75 149 L75 152 L65 152 Z" />
+                        
+                        <!-- Write icon -->
+                        <path d="M110 130 L115 130 L125 150 L120 150 Z" />
+                        <path d="M128 125 C140 120, 145 135, 135 145 L125 150 L120 135 Z" />
+                    </g>
+                    <!-- Chinese character 伤 simplified sketch -->
+                    <path d="M100 100 Q110 90, 120 100 L115 105 Q108 100, 105 103 L110 110 L100 115 L105 105 Q95 110, 90 100 L95 95 Q100 100, 105 95 Z" fill="white" opacity="0.7"/>
+                </svg>
+                <h1 class="ml-2 text-lg font-bold text-gray-800" data-i18n="nav.appName">听说读写学伤寒</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#features" class="text-gray-600 hover:text-gray-900" data-i18n="nav.features">功能</a>
+                <a href="#how-it-works" class="text-gray-600 hover:text-gray-900" data-i18n="nav.howItWorks">使用方法</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-gray-900" data-i18n="nav.testimonials">用户评价</a>
+                <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-pink-700 transition duration-300" data-i18n="nav.tryNow">立即体验</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white pt-32 pb-20">
+        <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center">
+            <div class="lg:w-1/2 mb-10 lg:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6" data-i18n="hero.title">告别枯燥记忆，迎接高效学习 — 听说读写学伤寒让中医经典学习轻松有趣！</h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90" data-i18n="hero.subtitle">通过听说读写四种互动学习模式，每天15分钟，轻松掌握《伤寒杂病论》等中医经典。</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button class="cta-button text-white font-bold py-4 px-8 rounded-lg text-lg shadow-lg animated-pulse" data-i18n="hero.primaryCta">立即免费试用</button>
+                    <button class="bg-white text-gray-800 font-bold py-4 px-8 rounded-lg text-lg shadow-lg hover:bg-gray-100 transition duration-300" data-i18n="hero.secondaryCta">查看演示视频</button>
+                </div>
+                <div class="mt-8 flex items-center">
+                    <div class="flex -space-x-2">
+                        <img src="https://randomuser.me/api/portraits/women/17.jpg" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://randomuser.me/api/portraits/women/56.jpg" class="w-10 h-10 rounded-full border-2 border-white">
+                    </div>
+                    <p class="ml-4 text-sm" data-i18n="hero.userCount">已有10,000+用户正在使用</p>
+                </div>
+            </div>
+            <div class="lg:w-1/2 flex justify-center">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        <iframe src="home.html" class="phone-iframe"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="problem.title">还在为枯燥难记的中医经典学习而困扰？你不是一个人！</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="problem.subtitle">传统的学习方法不仅效率低下，更让许多学生失去兴趣，阻碍您真正掌握中医精髓。</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center mb-16">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="rounded-xl shadow-2xl w-full">
+                        <rect width="800" height="600" fill="#f0f4f8"/>
+                        <g transform="translate(150, 100)">
+                            <rect x="0" y="0" width="500" height="400" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+                            <rect x="20" y="20" width="460" height="60" rx="10" fill="#edf2f7"/>
+                            <rect x="20" y="100" width="460" height="280" rx="10" fill="#e6e6e6"/>
+                            <circle cx="250" cy="240" r="100" fill="#cbd5e0"/>
+                            <path d="M200,190 Q250,150 300,190 T400,190" stroke="#a0aec0" stroke-width="4" fill="none"/>
+                            <text x="250" y="50" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">传统学习的困境</text>
+                        </g>
+                    </svg>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4" data-i18n="problem.painPoints">传统学习的三大痛点：</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                <i class="fas fa-times text-red-500"></i>
+                            </div>
+                            <p class="ml-3 text-lg text-gray-700" data-i18n="problem.point1">记忆枯燥：大量文言文需要反复记忆，容易遗忘</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                <i class="fas fa-times text-red-500"></i>
+                            </div>
+                            <p class="ml-3 text-lg text-gray-700" data-i18n="problem.point2">学习单一：缺乏多感官参与，知识掌握不牢固</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                                <i class="fas fa-times text-red-500"></i>
+                            </div>
+                            <p class="ml-3 text-lg text-gray-700" data-i18n="problem.point3">缺乏反馈：无法及时检验学习效果，难以持续学习</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flex flex-col-reverse md:flex-row items-center">
+                <div class="md:w-1/2 md:pr-12">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4" data-i18n="solution.title">听说读写学伤寒 — 专为中医经典学习打造的全新体验</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center">
+                                <i class="fas fa-check text-green-500"></i>
+                            </div>
+                            <p class="ml-3 text-lg text-gray-700" data-i18n="solution.point1">四维学习：听说读写四种模式全面强化记忆</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center">
+                                <i class="fas fa-check text-green-500"></i>
+                            </div>
+                            <p class="ml-3 text-lg text-gray-700" data-i18n="solution.point2">游戏化体验：化枯燥为趣味，让学习变得轻松愉快</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center">
+                                <i class="fas fa-check text-green-500"></i>
+                            </div>
+                            <p class="ml-3 text-lg text-gray-700" data-i18n="solution.point3">科学规划：每天仅需15分钟，365天轻松掌握全书</p>
+                        </li>
+                    </ul>
+                    <button class="cta-button text-white font-bold py-3 px-6 rounded-lg text-lg shadow-lg mt-8" data-i18n="solution.cta">立即开启高效学习之旅</button>
+                </div>
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="rounded-xl shadow-2xl w-full">
+                        <rect width="800" height="600" fill="#f0f4f8"/>
+                        <g transform="translate(150, 100)">
+                            <rect x="0" y="0" width="500" height="400" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+                            <rect x="20" y="20" width="460" height="60" rx="10" fill="#edf2f7"/>
+                            <rect x="20" y="100" width="460" height="280" rx="10" fill="#e6e6e6"/>
+                            <circle cx="250" cy="240" r="100" fill="#cbd5e0"/>
+                            <path d="M200,190 Q250,150 300,190 T400,190" stroke="#a0aec0" stroke-width="4" fill="none"/>
+                            <text x="250" y="50" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">听说读写学习新方法</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Key Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="features.title">四大学习模式，全方位提升记忆效率</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="features.subtitle">基于认知科学，我们设计了听说读写四种互补学习模式，让您的学习事半功倍</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- 听力模式 -->
+                <div class="feature-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-headphones text-2xl text-purple-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center text-gray-800 mb-4" data-i18n="features.listen.title">听 — 听力强化</h3>
+                        <p class="text-gray-600 text-center mb-6" data-i18n="features.listen.description">专业朗读配合拼音显示，强化记忆，随时随地都能学习</p>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="rounded-xl shadow-2xl w-full">
+                            <rect width="800" height="600" fill="#f0f4f8"/>
+                            <g transform="translate(150, 100)">
+                                <rect x="0" y="0" width="500" height="400" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+                                <rect x="20" y="20" width="460" height="60" rx="10" fill="#edf2f7"/>
+                                <rect x="20" y="100" width="460" height="280" rx="10" fill="#e6e6e6"/>
+                                <circle cx="250" cy="240" r="100" fill="#cbd5e0"/>
+                                <path d="M200,190 Q250,150 300,190 T400,190" stroke="#a0aec0" stroke-width="4" fill="none"/>
+                                <text x="250" y="50" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">听力模式演示</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <h4 class="font-medium text-gray-800 mb-2" data-i18n="features.listen.scenario">场景：通勤路上</h4>
+                        <p class="text-gray-600 text-sm" data-i18n="features.listen.benefit">利用碎片时间，通过听觉记忆加深印象，提升40%记忆效率</p>
+                    </div>
+                </div>
+                
+                <!-- 说话模式 -->
+                <div class="feature-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-microphone-alt text-2xl text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center text-gray-800 mb-4" data-i18n="features.speak.title">说 — 口语强化</h3>
+                        <p class="text-gray-600 text-center mb-6" data-i18n="features.speak.description">录音对比与智能评分，提升发音准确度，加深记忆印象</p>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="rounded-xl shadow-2xl w-full">
+                            <rect width="800" height="600" fill="#f0f4f8"/>
+                            <g transform="translate(150, 100)">
+                                <rect x="0" y="0" width="500" height="400" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+                                <rect x="20" y="20" width="460" height="60" rx="10" fill="#edf2f7"/>
+                                <rect x="20" y="100" width="460" height="280" rx="10" fill="#e6e6e6"/>
+                                <circle cx="250" cy="240" r="100" fill="#cbd5e0"/>
+                                <path d="M200,190 Q250,150 300,190 T400,190" stroke="#a0aec0" stroke-width="4" fill="none"/>
+                                <text x="250" y="50" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">口语模式演示</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <h4 class="font-medium text-gray-800 mb-2" data-i18n="features.speak.scenario">场景：课后复习</h4>
+                        <p class="text-gray-600 text-sm" data-i18n="features.speak.benefit">通过发声记忆，巩固学习内容，提升35%记忆保留率</p>
+                    </div>
+                </div>
+                
+                <!-- 阅读模式 -->
+                <div class="feature-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-book-reader text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center text-gray-800 mb-4" data-i18n="features.read.title">读 — 阅读强化</h3>
+                        <p class="text-gray-600 text-center mb-6" data-i18n="features.read.description">刮刮乐式逐字显示，游戏化阅读体验，趣味中提升专注力</p>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="rounded-xl shadow-2xl w-full">
+                            <rect width="800" height="600" fill="#f0f4f8"/>
+                            <g transform="translate(150, 100)">
+                                <rect x="0" y="0" width="500" height="400" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+                                <rect x="20" y="20" width="460" height="60" rx="10" fill="#edf2f7"/>
+                                <rect x="20" y="100" width="460" height="280" rx="10" fill="#e6e6e6"/>
+                                <circle cx="250" cy="240" r="100" fill="#cbd5e0"/>
+                                <path d="M200,190 Q250,150 300,190 T400,190" stroke="#a0aec0" stroke-width="4" fill="none"/>
+                                <text x="250" y="50" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">阅读模式演示</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <h4 class="font-medium text-gray-800 mb-2" data-i18n="features.read.scenario">场景：深度学习</h4>
+                        <p class="text-gray-600 text-sm" data-i18n="features.read.benefit">通过视觉记忆和互动，提升45%的内容理解度和记忆效果</p>
+                    </div>
+                </div>
+                
+                <!-- 写作模式 -->
+                <div class="feature-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-6 mx-auto">
+                            <i class="fas fa-pen-fancy text-2xl text-red-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center text-gray-800 mb-4" data-i18n="features.write.title">写 — 书写强化</h3>
+                        <p class="text-gray-600 text-center mb-6" data-i18n="features.write.description">智能输入框实时纠错，手写输入体验，深化记忆巩固</p>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="rounded-xl shadow-2xl w-full">
+                            <rect width="800" height="600" fill="#f0f4f8"/>
+                            <g transform="translate(150, 100)">
+                                <rect x="0" y="0" width="500" height="400" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+                                <rect x="20" y="20" width="460" height="60" rx="10" fill="#edf2f7"/>
+                                <rect x="20" y="100" width="460" height="280" rx="10" fill="#e6e6e6"/>
+                                <circle cx="250" cy="240" r="100" fill="#cbd5e0"/>
+                                <path d="M200,190 Q250,150 300,190 T400,190" stroke="#a0aec0" stroke-width="4" fill="none"/>
+                                <text x="250" y="50" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">书写模式演示</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <h4 class="font-medium text-gray-800 mb-2" data-i18n="features.write.scenario">场景：复习巩固</h4>
+                        <p class="text-gray-600 text-sm" data-i18n="features.write.benefit">通过手写输入，加深动作记忆，提升50%长期记忆保留率</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="cta-button text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg" data-i18n="features.cta">探索更多功能特性</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="value.title">听说读写学伤寒 — 中医学习者提升学习效率的终极利器！</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="value.subtitle">我们致力于帮助中医学习者在经典学习上实现效率提升300%，记忆保留率提高50%</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-bolt text-2xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4" data-i18n="value.efficiency.title">学习效率提升300%</h3>
+                    <p class="text-gray-600 text-center" data-i18n="value.efficiency.description">通过四维学习法，相比传统学习方式，您的学习效率将提升3倍以上，同样的时间内掌握更多知识</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-brain text-2xl text-teal-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4" data-i18n="value.retention.title">记忆保留率提高50%</h3>
+                    <p class="text-gray-600 text-center" data-i18n="value.retention.description">多感官参与学习，激活大脑不同区域，显著提高长期记忆保留率，告别"学了就忘"</p>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-chart-line text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4" data-i18n="value.progress.title">学习进度可视化</h3>
+                    <p class="text-gray-600 text-center" data-i18n="value.progress.description">详细的学习数据分析与进度追踪，清晰了解自己的学习状态，持续保持学习动力</p>
+                </div>
+            </div>
+            
+            <div class="mt-16">
+                <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl shadow-xl p-8 md:p-12">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-2/3 mb-8 md:mb-0 md:pr-8">
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4" data-i18n="value.callout.title">每天仅需15分钟，一年掌握《伤寒杂病论》全书</h3>
+                            <p class="text-white text-lg opacity-90 mb-6" data-i18n="value.callout.description">我们将《伤寒杂病论》分解为365个小单元，每天学习一个单元，每天仅需15分钟，轻松坚持，一年后您将完整掌握这部中医经典</p>
+                            <button class="bg-white text-purple-600 font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-100 transition duration-300" data-i18n="value.callout.cta">立即开始您的学习计划</button>
+                        </div>
+                        <div class="md:w-1/3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="rounded-xl shadow-2xl w-full">
+                                <rect width="800" height="600" fill="#f0f4f8"/>
+                                <g transform="translate(150, 100)">
+                                    <rect x="0" y="0" width="500" height="400" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+                                    <rect x="20" y="20" width="460" height="60" rx="10" fill="#edf2f7"/>
+                                    <rect x="20" y="100" width="460" height="280" rx="10" fill="#e6e6e6"/>
+                                    <circle cx="250" cy="240" r="100" fill="#cbd5e0"/>
+                                    <path d="M200,190 Q250,150 300,190 T400,190" stroke="#a0aec0" stroke-width="4" fill="none"/>
+                                    <text x="250" y="50" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">每日学习计划</text>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Social Proof/Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="testimonials.title">超过10,000名中医学习者的共同选择！</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="testimonials.subtitle">听听他们怎么说</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-16 h-16 rounded-full">
+                            <circle cx="50" cy="50" r="50" fill="#8A2387"/>
+                            <circle cx="50" cy="40" r="20" fill="#fff"/>
+                            <path d="M20,85 Q50,60 80,85" stroke="#fff" stroke-width="8" fill="none"/>
+                        </svg>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold text-gray-800" data-i18n="testimonials.user1.name">李医生</h4>
+                            <p class="text-gray-600" data-i18n="testimonials.user1.title">中医学院副教授</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-700" data-i18n="testimonials.user1.comment">"作为一名中医教育工作者，我强烈推荐这款App给我的学生。它将传统经典与现代学习方法完美结合，学生的学习热情和效果都有显著提升。"</p>
+                </div>
+                
+                <div class="testimonial-card bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-16 h-16 rounded-full">
+                            <circle cx="50" cy="50" r="50" fill="#8A2387"/>
+                            <circle cx="50" cy="40" r="20" fill="#fff"/>
+                            <path d="M20,85 Q50,60 80,85" stroke="#fff" stroke-width="8" fill="none"/>
+                        </svg>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold text-gray-800" data-i18n="testimonials.user2.name">张同学</h4>
+                            <p class="text-gray-600" data-i18n="testimonials.user2.title">中医学专业大三学生</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-700" data-i18n="testimonials.user2.comment">"原本背《伤寒论》简直是噩梦，自从用了这个App，每天15分钟的学习时间竟然如此轻松有效。游戏化的学习方式让我欲罢不能，现在已经连续学习60天了！"</p>
+                </div>
+                
+                <div class="testimonial-card bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-16 h-16 rounded-full">
+                            <circle cx="50" cy="50" r="50" fill="#8A2387"/>
+                            <circle cx="50" cy="40" r="20" fill="#fff"/>
+                            <path d="M20,85 Q50,60 80,85" stroke="#fff" stroke-width="8" fill="none"/>
+                        </svg>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-bold text-gray-800" data-i18n="testimonials.user3.name">王医师</h4>
+                            <p class="text-gray-600" data-i18n="testimonials.user3.title">中医馆主理人</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-700" data-i18n="testimonials.user3.comment">"作为一名执业多年的中医师，我一直在寻找高效复习经典的方法。这款App的四维学习法让我重新找回了学习的乐趣，也让我能在繁忙的工作之余持续提升自己。"</p>
+                </div>
+            </div>
+            
+            <div class="mt-16">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-center text-gray-800 mb-8" data-i18n="testimonials.partners.title">我们的合作伙伴</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 80" class="h-16 object-contain mx-auto">
+                            <rect width="150" height="80" fill="transparent"/>
+                            <circle cx="50" cy="40" r="30" fill="#e2e8f0"/>
+                            <text x="50" y="45" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">合作伙伴1</text>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 80" class="h-16 object-contain mx-auto">
+                            <rect width="150" height="80" fill="transparent"/>
+                            <rect x="20" y="20" width="110" height="40" rx="5" fill="#e2e8f0"/>
+                            <text x="75" y="45" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">合作伙伴2</text>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 80" class="h-16 object-contain mx-auto">
+                            <rect width="150" height="80" fill="transparent"/>
+                            <polygon points="75,20 100,40 75,60 50,40" fill="#e2e8f0"/>
+                            <text x="75" y="45" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">合作伙伴3</text>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 80" class="h-16 object-contain mx-auto">
+                            <rect width="150" height="80" fill="transparent"/>
+                            <path d="M30,40 Q75,10 120,40 Q75,70 30,40 Z" fill="#e2e8f0"/>
+                            <text x="75" y="45" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">合作伙伴4</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <button class="cta-button text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg" data-i18n="testimonials.cta">加入他们，开启高效学习之旅</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="howItWorks.title">简单易用，三步上手！</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="howItWorks.subtitle">我们的设计理念是让每一位用户都能轻松掌握App的使用方法</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center mb-16">
+                <div class="w-full md:w-2/3 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-purple-600 text-white text-xl font-bold flex items-center justify-center mb-6 mx-auto">1</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4" data-i18n="howItWorks.step1.title">选择学习书籍</h3>
+                        <p class="text-gray-600" data-i18n="howItWorks.step1.description">从我们精选的中医经典中选择您想学习的书籍，如《伤寒杂病论》</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-purple-600 text-white text-xl font-bold flex items-center justify-center mb-6 mx-auto">2</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4" data-i18n="howItWorks.step2.title">设置学习计划</h3>
+                        <p class="text-gray-600" data-i18n="howItWorks.step2.description">选择每天学习的字数和时间，系统将自动为您规划学习进度</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-purple-600 text-white text-xl font-bold flex items-center justify-center mb-6 mx-auto">3</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4" data-i18n="howItWorks.step3.title">开始四维学习</h3>
+                        <p class="text-gray-600" data-i18n="howItWorks.step3.description">通过听说读写四种模式交替学习，全面提升记忆效果</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl shadow-lg p-8 md:p-12">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" class="rounded-xl shadow-2xl w-full">
+                            <rect width="800" height="600" fill="#f0f4f8"/>
+                            <g transform="translate(150, 100)">
+                                <rect x="0" y="0" width="500" height="400" rx="20" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+                                <rect x="20" y="20" width="460" height="60" rx="10" fill="#edf2f7"/>
+                                <rect x="20" y="100" width="460" height="280" rx="10" fill="#e6e6e6"/>
+                                <circle cx="250" cy="240" r="100" fill="#cbd5e0"/>
+                                <path d="M200,190 Q250,150 300,190 T400,190" stroke="#a0aec0" stroke-width="4" fill="none"/>
+                                <text x="250" y="50" font-family="Arial" font-size="18" fill="#4a5568" text-anchor="middle">App使用流程</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6" data-i18n="howItWorks.demo.title">看看它是如何工作的</h3>
+                        <p class="text-gray-600 mb-8" data-i18n="howItWorks.demo.description">我们精心设计的用户界面让学习变得简单直观，无需复杂操作，即可享受高效学习体验</p>
+                        <button class="cta-button text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg" data-i18n="howItWorks.demo.cta">观看演示视频</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Screenshots Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="screenshots.title">抢先预览 — 听说读写学伤寒核心功能一览</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="screenshots.subtitle">滑动浏览，发现听说读写学伤寒如何让中医经典学习变得简单有趣</p>
+            </div>
+            
+            <div class="flex overflow-x-auto pb-8 space-x-6">
+                <div class="flex-shrink-0">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <div class="flex space-x-1">
+                                    <i class="fas fa-signal"></i>
+                                    <i class="fas fa-wifi"></i>
+                                    <i class="fas fa-battery-full"></i>
+                                </div>
+                            </div>
+                            <iframe src="home.html" class="phone-iframe"></iframe>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4 font-medium text-gray-700" data-i18n="screenshots.home">首页</p>
+                </div>
+                
+                <div class="flex-shrink-0">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <div class="flex space-x-1">
+                                    <i class="fas fa-signal"></i>
+                                    <i class="fas fa-wifi"></i>
+                                    <i class="fas fa-battery-full"></i>
+                                </div>
+                            </div>
+                            <iframe src="listen.html" class="phone-iframe"></iframe>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4 font-medium text-gray-700" data-i18n="screenshots.listen">听力模式</p>
+                </div>
+                
+                <div class="flex-shrink-0">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <div class="flex space-x-1">
+                                    <i class="fas fa-signal"></i>
+                                    <i class="fas fa-wifi"></i>
+                                    <i class="fas fa-battery-full"></i>
+                                </div>
+                            </div>
+                            <iframe src="speak.html" class="phone-iframe"></iframe>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4 font-medium text-gray-700" data-i18n="screenshots.speak">口语模式</p>
+                </div>
+                
+                <div class="flex-shrink-0">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <div class="flex space-x-1">
+                                    <i class="fas fa-signal"></i>
+                                    <i class="fas fa-wifi"></i>
+                                    <i class="fas fa-battery-full"></i>
+                                </div>
+                            </div>
+                            <iframe src="read.html" class="phone-iframe"></iframe>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4 font-medium text-gray-700" data-i18n="screenshots.read">阅读模式</p>
+                </div>
+                
+                <div class="flex-shrink-0">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <div class="flex space-x-1">
+                                    <i class="fas fa-signal"></i>
+                                    <i class="fas fa-wifi"></i>
+                                    <i class="fas fa-battery-full"></i>
+                                </div>
+                            </div>
+                            <iframe src="write.html" class="phone-iframe"></iframe>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4 font-medium text-gray-700" data-i18n="screenshots.write">书写模式</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="home.html" target="_blank" class="cta-button text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg inline-flex items-center" data-i18n="screenshots.cta">
+                    <span>体验完整App Demo — 功能全貌抢先看！</span>
+                    <i class="fas fa-external-link-alt ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6" data-i18n="cta.title">准备好提升您的中医学习效率了吗？</h2>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto mb-10" data-i18n="cta.subtitle">加入我们，与10,000+中医爱好者一起，开启轻松高效的学习之旅</p>
+                <button class="bg-white text-purple-600 font-bold py-4 px-10 rounded-lg text-xl shadow-lg hover:bg-gray-100 transition duration-300 transform hover:scale-105" data-i18n="cta.button">立即免费体验7天</button>
+                <p class="mt-4 opacity-80" data-i18n="cta.note">无需信用卡，随时可取消</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-12">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-check text-xl text-purple-600"></i>
+                    </div>
+                    <p class="ml-4 text-lg" data-i18n="cta.benefit1">四维学习法，提升记忆效率</p>
+                </div>
+                
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-check text-xl text-purple-600"></i>
+                    </div>
+                    <p class="ml-4 text-lg" data-i18n="cta.benefit2">每天15分钟，一年掌握全书</p>
+                </div>
+                
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-check text-xl text-purple-600"></i>
+                    </div>
+                    <p class="ml-4 text-lg" data-i18n="cta.benefit3">专业中医内容，准确可靠</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waiting List Section -->
+    <section class="py-20 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6" data-i18n="waitingList.title">抢先体验内测资格，赢在起跑线！</h2>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto" data-i18n="waitingList.subtitle">加入听说读写学伤寒独家内测等待列表，第一时间获取内测邀请码、限量福利和专属优惠！名额有限，立即加入！</p>
+            </div>
+            
+            <div class="max-w-lg mx-auto waiting-list-form rounded-xl p-8">
+                <form class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium mb-2" data-i18n="waitingList.nameLabel">姓名（选填）</label>
+                        <input type="text" id="name" class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" data-i18n-placeholder="waitingList.namePlaceholder" placeholder="您的姓名">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-2" data-i18n="waitingList.emailLabel">电子邮箱（必填）</label>
+                        <input type="email" id="email" required class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" data-i18n-placeholder="waitingList.emailPlaceholder" placeholder="您的电子邮箱">
+                    </div>
+                    
+                    <div>
+                        <label for="profession" class="block text-sm font-medium mb-2" data-i18n="waitingList.professionLabel">您的职业（选填）</label>
+                        <select id="profession" class="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            <option value="" data-i18n="waitingList.professionDefault">请选择</option>
+                            <option value="student" data-i18n="waitingList.professionStudent">中医学生</option>
+                            <option value="doctor" data-i18n="waitingList.professionDoctor">中医医师</option>
+                            <option value="teacher" data-i18n="waitingList.professionTeacher">中医教师</option>
+                            <option value="enthusiast" data-i18n="waitingList.professionEnthusiast">中医爱好者</option>
+                            <option value="other" data-i18n="waitingList.professionOther">其他</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="w-full cta-button text-white font-bold py-3 px-6 rounded-lg text-lg shadow-lg" data-i18n="waitingList.submit">加入等待列表，获取内测资格</button>
+                </form>
+                
+                <div class="mt-6 text-center text-sm opacity-80">
+                    <p data-i18n="waitingList.privacy">提交即表示您同意我们的隐私政策和服务条款</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-lg opacity-90" data-i18n="waitingList.exclusive">
+                    <i class="fas fa-gift text-yellow-400 mr-2"></i>
+                    内测用户专享：30天免费高级会员、独家学习资料包
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube Video Stream Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="youtube.title">用户真实案例 — 看听说读写学伤寒如何助力中医学习者提升学习效果</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="youtube.subtitle">我们收集了一系列真实用户的使用体验和学习成果展示</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-100">
+                        <!-- YouTube 视频嵌入（占位符） -->
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-56"></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2" data-i18n="youtube.video1.title">《伤寒论》学习效率提升300% — 李同学的故事</h3>
+                        <p class="text-gray-600" data-i18n="youtube.video1.description">李同学分享他如何通过听说读写四种模式，在两个月内掌握了《伤寒论》的太阳病篇</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-100">
+                        <!-- YouTube 视频嵌入（占位符） -->
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-56"></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2" data-i18n="youtube.video2.title">App功能全面演示 — 15分钟了解听说读写学习法</h3>
+                        <p class="text-gray-600" data-i18n="youtube.video2.description">详细演示App的四大学习模式和使用方法，让您快速掌握使用技巧</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-100">
+                        <!-- YouTube 视频嵌入（占位符） -->
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-56"></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2" data-i18n="youtube.video3.title">中医院校推荐 — 张教授谈听说读写学习法的科学依据</h3>
+                        <p class="text-gray-600" data-i18n="youtube.video3.description">著名中医教育专家张教授分析听说读写四维学习法的认知科学基础和应用价值</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://www.youtube.com/channel/UCxxxxxxxx" target="_blank" class="inline-flex items-center text-purple-600 font-bold hover:text-purple-700 transition duration-300">
+                    <span data-i18n="youtube.more">查看更多视频</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Twitter Feed Stream Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="twitter.title">用户口碑 — Twitter实时热议听说读写学伤寒的学习效果</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="twitter.subtitle">来自社交媒体的真实反馈，了解用户如何评价我们的App</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-start mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/25.jpg" alt="Twitter用户头像" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-800">赵医生 @TCM_Doctor</h4>
+                            <p class="text-gray-500 text-sm">2小时前</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">刚用了一个月的#听说读写学伤寒 App，不得不说四维学习法太有效了！以前背伤寒论总是记不住，现在每天15分钟，已经能流利背诵十几条原文了！强烈推荐给所有中医学习者👍</p>
+                    <div class="flex items-center text-gray-500 text-sm">
+                        <div class="flex items-center mr-4">
+                            <i class="far fa-heart mr-1"></i>
+                            <span>245</span>
+                        </div>
+                        <div class="flex items-center mr-4">
+                            <i class="far fa-comment mr-1"></i>
+                            <span>37</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-retweet mr-1"></i>
+                            <span>126</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-start mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Twitter用户头像" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-800">中医学生李明 @TCM_Student</h4>
+                            <p class="text-gray-500 text-sm">1天前</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">期末考试前用#听说读写学伤寒 恶补了一周，居然考了班级第一！这款App把枯燥的内容变得超级有趣，特别是"说"模式的语音识别功能，让我练习发音的同时记住了内容。推荐所有中医学生尝试！</p>
+                    <div class="flex items-center text-gray-500 text-sm">
+                        <div class="flex items-center mr-4">
+                            <i class="far fa-heart mr-1"></i>
+                            <span>189</span>
+                        </div>
+                        <div class="flex items-center mr-4">
+                            <i class="far fa-comment mr-1"></i>
+                            <span>43</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-retweet mr-1"></i>
+                            <span>87</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-start mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/72.jpg" alt="Twitter用户头像" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-800">中医爱好者小王 @TCM_Lover</h4>
+                            <p class="text-gray-500 text-sm">3天前</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">作为一名中医爱好者，一直想系统学习《伤寒论》但苦于没时间。#听说读写学伤寒 改变了这一切！每天通勤时听听、睡前写写，两个月就学完了20%的内容，而且记忆非常牢固。这款App真的改变了我的学习方式！</p>
+                    <div class="flex items-center text-gray-500 text-sm">
+                        <div class="flex items-center mr-4">
+                            <i class="far fa-heart mr-1"></i>
+                            <span>156</span>
+                        </div>
+                        <div class="flex items-center mr-4">
+                            <i class="far fa-comment mr-1"></i>
+                            <span>24</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-retweet mr-1"></i>
+                            <span>68</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://twitter.com/search?q=%23听说读写学伤寒" target="_blank" class="inline-flex items-center text-purple-600 font-bold hover:text-purple-700 transition duration-300">
+                    <span data-i18n="twitter.more">查看更多Twitter讨论</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="faq.title">常见问题</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="faq.subtitle">我们收集了用户最关心的问题，为您提供详细解答</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-6">
+                    <button class="flex justify-between items-center w-full text-left font-bold text-lg text-gray-800 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition duration-300">
+                        <span data-i18n="faq.q1">听说读写学伤寒如何帮我提升中医经典学习效率？</span>
+                        <i class="fas fa-chevron-down text-purple-600"></i>
+                    </button>
+                    <div class="mt-2 p-4 text-gray-600" data-i18n="faq.a1">
+                        我们的App基于认知科学，通过听说读写四种互补学习模式，激活大脑不同区域参与学习。听力模式帮助您通过耳朵记忆；口语模式通过发音加深印象；阅读模式采用游戏化方式提升专注力；书写模式通过手写输入巩固记忆。这种全方位学习方法比传统单一学习效率高出3倍以上。
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <button class="flex justify-between items-center w-full text-left font-bold text-lg text-gray-800 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition duration-300">
+                        <span data-i18n="faq.q2">App目前支持哪些中医经典著作？</span>
+                        <i class="fas fa-chevron-down text-purple-600"></i>
+                    </button>
+                    <div class="mt-2 p-4 text-gray-600" data-i18n="faq.a2">
+                        目前我们重点支持《伤寒杂病论》，包括《伤寒论》和《金匮要略》两部分，未来将陆续上线《黄帝内经》、《神农本草经》、《难经》、《温病学》等重要中医经典。我们的内容由中医专家审校，确保准确可靠。
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <button class="flex justify-between items-center w-full text-left font-bold text-lg text-gray-800 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition duration-300">
+                        <span data-i18n="faq.q3">每天需要学习多长时间？</span>
+                        <i class="fas fa-chevron-down text-purple-600"></i>
+                    </button>
+                    <div class="mt-2 p-4 text-gray-600" data-i18n="faq.a3">
+                        我们建议每天学习15-20分钟，这是记忆效率最佳的时长。App会将内容分解为小单元，每天学习一个单元，循序渐进。例如，《伤寒论》全书我们分为365个单元，每天学习一个，一年即可掌握全书。当然，您也可以根据自己的时间和能力调整学习计划。
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <button class="flex justify-between items-center w-full text-left font-bold text-lg text-gray-800 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition duration-300">
+                        <span data-i18n="faq.q4">是否适合零基础的中医爱好者使用？</span>
+                        <i class="fas fa-chevron-down text-purple-600"></i>
+                    </button>
+                    <div class="mt-2 p-4 text-gray-600" data-i18n="faq.a4">
+                        非常适合！我们专门为各种水平的学习者设计了不同的学习路径。对于零基础爱好者，App会提供更详细的注释和解释，帮助您理解古文和中医概念。同时，游戏化的学习方式也让入门变得更加简单有趣。
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <button class="flex justify-between items-center w-full text-left font-bold text-lg text-gray-800 p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition duration-300">
+                        <span data-i18n="faq.q5">App是免费的吗？收费标准是什么？</span>
+                        <i class="fas fa-chevron-down text-purple-600"></i>
+                    </button>
+                    <div class="mt-2 p-4 text-gray-600" data-i18n="faq.a5">
+                        App提供免费和付费两种版本。免费版包含基础的学习功能和部分内容；付费版解锁完整的四维学习功能、全部经典著作内容、详细解析和高级统计分析等。我们提供月度会员(¥39/月)、年度会员(¥299/年，相当于¥25/月)和终身会员(¥699)三种选择。新用户可以免费试用7天，体验全部高级功能。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="text-purple-600 font-bold hover:text-purple-700 transition duration-300" data-i18n="faq.more">查看更多常见问题 →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="40" height="40">
+                            <defs>
+                                <linearGradient id="footerLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#8A2387"/>
+                                    <stop offset="50%" stop-color="#E94057"/>
+                                    <stop offset="100%" stop-color="#F27121"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="100" r="90" fill="url(#footerLogoGradient)" />
+                            <g fill="white">
+                                <!-- Listen icon -->
+                                <path d="M70 70 C70 60, 90 60, 90 70 L90 100 C90 110, 70 110, 70 100 Z" stroke="white" stroke-width="2"/>
+                                <path d="M60 95 Q60 120, 80 125 L80 115 Q70 113, 70 95 Z" />
+                                <path d="M100 95 Q100 120, 80 125 L80 115 Q90 113, 90 95 Z" />
+                                
+                                <!-- Speak icon -->
+                                <path d="M120 70 C120 60, 130 65, 125 75 Q140 85, 130 100 C125 105, 115 90, 120 85 Z" />
+                                
+                                <!-- Read icon -->
+                                <path d="M50 130 L90 130 L90 140 L50 140 Z" />
+                                <path d="M60 142 L80 142 L80 147 L60 147 Z" />
+                                <path d="M65 149 L75 149 L75 152 L65 152 Z" />
+                                
+                                <!-- Write icon -->
+                                <path d="M110 130 L115 130 L125 150 L120 150 Z" />
+                                <path d="M128 125 C140 120, 145 135, 135 145 L125 150 L120 135 Z" />
+                            </g>
+                            <!-- Chinese character 伤 simplified sketch -->
+                            <path d="M100 100 Q110 90, 120 100 L115 105 Q108 100, 105 103 L110 110 L100 115 L105 105 Q95 110, 90 100 L95 95 Q100 100, 105 95 Z" fill="white" opacity="0.7"/>
+                        </svg>
+                        <h3 class="ml-2 text-xl font-bold" data-i18n="footer.appName">听说读写学伤寒</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4" data-i18n="footer.slogan">让中医经典学习变得简单有趣</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4" data-i18n="footer.product">产品</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#features" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.features">功能特性</a>
+                        </li>
+                        <li>
+                            <a href="#how-it-works" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.howItWorks">使用方法</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.pricing">价格</a>
+                        </li>
+                        <li>
+                            <a href="#faq" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.faq">常见问题</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4" data-i18n="footer.resources">资源</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.blog">博客</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.tutorials">教程</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.support">帮助中心</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.community">用户社区</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4" data-i18n="footer.company">公司</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.about">关于我们</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.careers">加入我们</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.contact">联系我们</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-i18n="footer.media">媒体资源</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0" data-i18n="footer.copyright"> 2023 听说读写学伤寒. 保留所有权利.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-500 hover:text-gray-400 text-sm" data-i18n="footer.terms">服务条款</a>
+                        <a href="#" class="text-gray-500 hover:text-gray-400 text-sm" data-i18n="footer.privacy">隐私政策</a>
+                        <a href="#" class="text-gray-500 hover:text-gray-400 text-sm" data-i18n="footer.cookies">Cookie 政策</a>
+                        <div class="flex items-center">
+                            <span class="text-gray-500 text-sm mr-2" data-i18n="footer.language">切换语言:</span>
+                            <select id="footer-language-select" class="bg-gray-800 text-gray-400 text-sm rounded px-2 py-1 focus:outline-none">
+                                <option value="zh" selected>中文</option>
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 语言切换功能
+        let currentLanguage = 'zh';
+        let translations = {};
+        
+        async function loadTranslations(lang) {
+            try {
+                const response = await fetch(`${lang}.json`);
+                translations = await response.json();
+                updatePageContent();
+            } catch (error) {
+                console.error('Failed to load translations:', error);
+            }
+        }
+        
+        function updatePageContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[key]) {
+                    element.textContent = translations[key];
+                }
+            });
+            
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[key]) {
+                    element.placeholder = translations[key];
+                }
+            });
+        }
+        
+        document.getElementById('language-select').addEventListener('change', function() {
+            currentLanguage = this.value;
+            document.getElementById('footer-language-select').value = currentLanguage;
+            loadTranslations(currentLanguage);
+        });
+        
+        document.getElementById('footer-language-select').addEventListener('change', function() {
+            currentLanguage = this.value;
+            document.getElementById('language-select').value = currentLanguage;
+            loadTranslations(currentLanguage);
+        });
+        
+        // 初始加载
+        loadTranslations(currentLanguage);
+        
+        // FAQ 切换效果
+        document.querySelectorAll('.faq-item button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+    </script>
+</body>
 </html>

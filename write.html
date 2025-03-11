@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="write.title">书写模式 - 听说读写学伤寒</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F7F8FC;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #E2E8F0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8A2387, #E94057, #F27121);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .input-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .char-input {
+            width: 50px;
+            height: 60px;
+            border: 2px solid #CBD5E0;
+            border-radius: 8px;
+            font-size: 22px;
+            text-align: center;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .char-input:focus {
+            border-color: #8A2387;
+            box-shadow: 0 0 0 3px rgba(138, 35, 135, 0.2);
+            outline: none;
+        }
+        
+        .char-input.correct {
+            border-color: #4ADE80;
+            background-color: rgba(74, 222, 128, 0.1);
+        }
+        
+        .char-input.incorrect {
+            border-color: #F87171;
+            background-color: rgba(248, 113, 113, 0.1);
+        }
+        
+        .virtual-keyboard {
+            position: fixed;
+            bottom: 70px;
+            left: 0;
+            right: 0;
+            background-color: #F1F5F9;
+            padding: 10px;
+            border-top: 1px solid #E2E8F0;
+            z-index: 9;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .keyboard-key {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .keyboard-key:active {
+            transform: scale(0.95);
+            background-color: #F3F4F6;
+        }
+        
+        .hint-button {
+            background: linear-gradient(135deg, #8A2387, #E94057, #F27121);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .success-animation {
+            animation: success-pulse 1s;
+        }
+        
+        @keyframes success-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content pb-20">
+        <!-- 顶部导航 -->
+        <div class="bg-white p-4 shadow-sm sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <button class="p-2">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </button>
+                <div class="text-center">
+                    <h1 class="text-lg font-bold text-gray-800" data-i18n="write.mode">书写模式</h1>
+                    <p class="text-sm text-gray-500">《伤寒杂病论》- 平脉法第一 (1.1)</p>
+                </div>
+                <button class="p-2">
+                    <i class="fas fa-ellipsis-v text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="p-4">
+            <!-- 进度显示 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm font-medium text-gray-800" data-i18n="write.progress">今日进度</span>
+                    <span class="text-sm text-purple-600">96/150字</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 60%;"></div>
+                </div>
+            </div>
+            
+            <!-- 提示文本 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <h3 class="font-bold text-gray-800 mb-4">平脉法第一</h3>
+                <p class="text-gray-800 text-lg leading-relaxed" id="originalText">形色气味，脹大自靈，脈有三部，闔以候人</p>
+                
+                <div class="flex justify-between mt-6">
+                    <button class="hint-button font-medium text-base" id="listenButton">
+                        <i class="fas fa-volume-up mr-1"></i>
+                        <span data-i18n="write.listen">听原文</span>
+                    </button>
+                    <button class="hint-button font-medium text-base" id="hintButton">
+                        <i class="far fa-lightbulb mr-1"></i>
+                        <span data-i18n="write.hint">提示</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 输入区域 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-20">
+                <h3 class="font-bold text-gray-800 mb-4 text-center" data-i18n="write.instruction">请输入下方文字</h3>
+                
+                <div class="input-container" id="inputContainer">
+                    <input type="text" class="char-input" maxlength="1" data-index="0">
+                    <input type="text" class="char-input" maxlength="1" data-index="1">
+                    <input type="text" class="char-input" maxlength="1" data-index="2">
+                    <input type="text" class="char-input" maxlength="1" data-index="3">
+                    <input type="text" class="char-input" maxlength="1" data-index="4">
+                    <input type="text" class="char-input" maxlength="1" data-index="5">
+                    <input type="text" class="char-input" maxlength="1" data-index="6">
+                    <input type="text" class="char-input" maxlength="1" data-index="7">
+                </div>
+                
+                <div class="flex justify-end mt-8">
+                    <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium" id="submitButton" data-i18n="write.check">
+                        检查
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 虚拟键盘 -->
+        <div class="virtual-keyboard" id="virtualKeyboard">
+            <div class="keyboard-key">形</div>
+            <div class="keyboard-key">色</div>
+            <div class="keyboard-key">气</div>
+            <div class="keyboard-key">味</div>
+            <div class="keyboard-key">，</div>
+            <div class="keyboard-key">脹</div>
+            <div class="keyboard-key">大</div>
+            <div class="keyboard-key">自</div>
+            <div class="keyboard-key">靈</div>
+            <div class="keyboard-key">脈</div>
+            <div class="keyboard-key">有</div>
+            <div class="keyboard-key">三</div>
+            <div class="keyboard-key">部</div>
+            <div class="keyboard-key">闔</div>
+            <div class="keyboard-key">以</div>
+            <div class="keyboard-key">候</div>
+            <div class="keyboard-key">人</div>
+            <div class="keyboard-key" style="width: 70px;">
+                <i class="fas fa-backspace"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar py-2 px-4">
+        <div class="flex justify-around items-center">
+            <div class="flex flex-col items-center">
+                <i class="fas fa-home text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.home">首页</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-book text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.books">书籍</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
+                    <i class="fas fa-play text-white text-lg"></i>
+                </div>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.practice">学习</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-trophy text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.achievements">成就</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.profile">我的</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 语言切换功能
+        let currentLanguage = 'zh';
+        let translations = {};
+        
+        async function loadTranslations(lang) {
+            try {
+                const response = await fetch(`${lang}.json`);
+                translations = await response.json();
+                updatePageContent();
+            } catch (error) {
+                console.error('Failed to load translations:', error);
+            }
+        }
+        
+        function updatePageContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[key]) {
+                    element.textContent = translations[key];
+                }
+            });
+        }
+        
+        // 初始加载
+        loadTranslations(currentLanguage);
+        
+        // 输入处理
+        const inputs = document.querySelectorAll('.char-input');
+        const virtualKeyboardKeys = document.querySelectorAll('.keyboard-key');
+        const submitButton = document.getElementById('submitButton');
+        const originalText = document.getElementById('originalText').textContent;
+        const correctChars = originalText.slice(0, inputs.length);
+        
+        // 设置第一个输入框为焦点
+        inputs[0].focus();
+        
+        // 输入框焦点移动
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+            
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+        
+        // 虚拟键盘处理
+        virtualKeyboardKeys.forEach(key => {
+            key.addEventListener('click', () => {
+                const focusedInput = document.activeElement;
+                if (focusedInput.classList.contains('char-input')) {
+                    const currentIndex = parseInt(focusedInput.dataset.index);
+                    
+                    if (key.querySelector('i') && key.querySelector('i').classList.contains('fa-backspace')) {
+                        // 删除键
+                        if (focusedInput.value && currentIndex >= 0) {
+                            focusedInput.value = '';
+                        } else if (currentIndex > 0) {
+                            inputs[currentIndex - 1].focus();
+                            inputs[currentIndex - 1].value = '';
+                        }
+                    } else {
+                        // 字符键
+                        focusedInput.value = key.textContent;
+                        if (currentIndex < inputs.length - 1) {
+                            inputs[currentIndex + 1].focus();
+                        }
+                    }
+                }
+            });
+        });
+        
+        // 检查输入
+        submitButton.addEventListener('click', () => {
+            let allCorrect = true;
+            
+            inputs.forEach((input, index) => {
+                if (input.value === correctChars[index]) {
+                    input.classList.add('correct');
+                    input.classList.remove('incorrect');
+                } else {
+                    input.classList.add('incorrect');
+                    input.classList.remove('correct');
+                    allCorrect = false;
+                }
+            });
+            
+            if (allCorrect) {
+                // 全部正确，显示成功动画
+                submitButton.textContent = translations['write.correct'] || '正确！';
+                submitButton.classList.add('success-animation');
+                setTimeout(() => {
+                    submitButton.textContent = translations['write.continue'] || '继续';
+                    submitButton.innerHTML += ' <i class="fas fa-arrow-right ml-1"></i>';
+                }, 1500);
+            }
+        });
+        
+        // 听原文按钮
+        document.getElementById('listenButton').addEventListener('click', () => {
+            // 这里应该播放音频，但在示例中我们只做简单提示
+            alert('播放原文音频...');
+        });
+        
+        // 提示按钮
+        document.getElementById('hintButton').addEventListener('click', () => {
+            const focusedInput = document.activeElement;
+            if (focusedInput.classList.contains('char-input')) {
+                const currentIndex = parseInt(focusedInput.dataset.index);
+                focusedInput.value = correctChars[currentIndex];
+                if (currentIndex < inputs.length - 1) {
+                    inputs[currentIndex + 1].focus();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
