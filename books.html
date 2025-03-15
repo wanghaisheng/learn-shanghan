@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="books.title">书籍列表 - 听说读写学伤寒</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F7F8FC;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .book-card {
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .book-cover {
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1rem;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            z-index: 1;
+        }
+        
+        .book-cover h3, .book-cover p {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .book-content {
+            padding: 1.5rem;
+            background: white;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background-color: #E2E8F0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 0.75rem 0;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #8A2387, #E94057, #F27121);
+            border-radius: 3px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #8A2387, #E94057);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            border: 1px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content pb-20">
+        <!-- 顶部导航 -->
+        <div class="bg-white p-4 shadow-sm sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <a href="home.html" class="p-2">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </a>
+                <div class="text-center">
+                    <h1 class="text-lg font-bold text-gray-800" data-i18n="books.list.title">我的书籍</h1>
+                </div>
+                <button class="p-2">
+                    <i class="fas fa-search text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="px-4 py-6">
+            <h2 class="text-xl font-bold text-gray-800 section-title" data-i18n="books.inProgress">进行中的书籍</h2>
+            
+            <!-- 进行中的书籍 -->
+            <div class="grid grid-cols-1 gap-6 mb-8">
+                <!-- 伤寒论 -->
+                <div class="book-card">
+                    <div class="book-cover" style="background-image: linear-gradient(135deg, #3B82F6, #4F46E5);">
+                        <h3 class="text-white font-bold text-xl">《伤寒杂病论》</h3>
+                        <p class="text-white text-sm opacity-90">桂林古本</p>
+                    </div>
+                    <div class="book-content">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">已学习: 32%</span>
+                            <span class="status-badge bg-green-100 text-green-600">进行中</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill bg-gradient-to-r from-blue-500 to-indigo-600" style="width: 32%;"></div>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <p class="text-sm text-gray-700">当前: 平脉法第一 (1.1)</p>
+                            <span class="status-badge bg-purple-100 text-purple-600">主要计划</span>
+                        </div>
+                        <p class="text-sm text-purple-600 mb-3">总进度: 第32天 / 共365天</p>
+                        <a href="book-detail.html" class="block w-full btn-primary text-white py-2.5 rounded-lg text-sm font-medium text-center">
+                            <i class="fas fa-play-circle mr-2"></i>
+                            <span data-i18n="home.continue">继续学习</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="text-xl font-bold text-gray-800 section-title" data-i18n="books.notStarted">未开始的书籍</h2>
+            
+            <!-- 未开始的书籍 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- 金匮要略 -->
+                <div class="book-card">
+                    <div class="book-cover" style="background-image: linear-gradient(135deg, #F59E0B, #D97706);">
+                        <h3 class="text-white font-bold text-xl">《金匮要略》</h3>
+                        <p class="text-white text-sm opacity-90">经典原文</p>
+                    </div>
+                    <div class="book-content">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">已学习: 0%</span>
+                            <span class="status-badge bg-gray-100 text-gray-600">未开始</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill bg-gradient-to-r from-yellow-500 to-orange-600" style="width: 0%;"></div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">建议学习时间: 12个月 (365天)</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="book-detail.html" class="w-full btn-primary bg-gradient-to-r from-yellow-500 to-orange-600 text-white py-2.5 rounded-lg text-sm font-medium text-center">
+                                <i class="fas fa-book-open mr-2"></i>
+                                <span data-i18n="home.start">开始学习</span>
+                            </a>
+                            <button class="w-full btn-secondary border-orange-500 text-orange-600 py-2.5 rounded-lg text-sm font-medium">
+                                <i class="fas fa-plus-circle mr-2"></i>
+                                加入学习计划
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 黄帝内经 -->
+                <div class="book-card">
+                    <div class="book-cover" style="background-image: linear-gradient(135deg, #10B981, #059669);">
+                        <h3 class="text-white font-bold text-xl">《黄帝内经素问》</h3>
+                        <p class="text-white text-sm opacity-90">经典原文</p>
+                    </div>
+                    <div class="book-content">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">已学习: 0%</span>
+                            <span class="status-badge bg-gray-100 text-gray-600">未开始</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill bg-gradient-to-r from-green-500 to-teal-600" style="width: 0%;"></div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">建议学习时间: 18个月 (548天)</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="book-detail.html" class="w-full btn-primary bg-gradient-to-r from-green-500 to-teal-600 text-white py-2.5 rounded-lg text-sm font-medium text-center">
+                                <i class="fas fa-book-open mr-2"></i>
+                                <span data-i18n="home.start">开始学习</span>
+                            </a>
+                            <button class="w-full btn-secondary border-teal-500 text-teal-600 py-2.5 rounded-lg text-sm font-medium">
+                                <i class="fas fa-plus-circle mr-2"></i>
+                                加入学习计划
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="text-xl font-bold text-gray-800 section-title" data-i18n="books.completed">已完成的书籍</h2>
+            
+            <!-- 已完成的书籍 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 神农本草经 -->
+                <div class="book-card">
+                    <div class="book-cover" style="background-image: linear-gradient(135deg, #8B5CF6, #D946EF);">
+                        <h3 class="text-white font-bold text-xl">《神农本草经》</h3>
+                        <p class="text-white text-sm opacity-90">经典原文</p>
+                    </div>
+                    <div class="book-content">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">已学习: 100%</span>
+                            <span class="status-badge bg-green-100 text-green-600">已完成</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill bg-gradient-to-r from-purple-500 to-pink-600" style="width: 100%;"></div>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <p class="text-sm text-gray-700">完成时间: 2023-05-15</p>
+                            <span class="status-badge bg-yellow-100 text-yellow-700">
+                                <i class="fas fa-star text-yellow-500 mr-1"></i>
+                                3650分
+                            </span>
+                        </div>
+                        <a href="book-detail.html" class="w-full btn-primary bg-gradient-to-r from-purple-500 to-pink-600 text-white py-2.5 rounded-lg text-sm font-medium text-center">
+                            <i class="fas fa-sync-alt mr-2"></i>
+                            <span data-i18n="books.review">复习</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 难经 -->
+                <div class="book-card">
+                    <div class="book-cover" style="background-image: linear-gradient(135deg, #4F46E5, #2563EB);">
+                        <h3 class="text-white font-bold text-xl">《难经》</h3>
+                        <p class="text-white text-sm opacity-90">经典原文</p>
+                    </div>
+                    <div class="book-content">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">已学习: 100%</span>
+                            <span class="status-badge bg-green-100 text-green-600">已完成</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill bg-gradient-to-r from-indigo-500 to-blue-600" style="width: 100%;"></div>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <p class="text-sm text-gray-700">完成时间: 2023-02-10</p>
+                            <span class="status-badge bg-yellow-100 text-yellow-700">
+                                <i class="fas fa-star text-yellow-500 mr-1"></i>
+                                2800分
+                            </span>
+                        </div>
+                        <a href="book-detail.html" class="w-full btn-primary bg-gradient-to-r from-indigo-500 to-blue-600 text-white py-2.5 rounded-lg text-sm font-medium text-center">
+                            <i class="fas fa-sync-alt mr-2"></i>
+                            <span data-i18n="books.review">复习</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 添加新书按钮 -->
+            <div class="mt-8 text-center">
+                <button class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-medium shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <i class="fas fa-plus-circle mr-2"></i>
+                    浏览更多书籍
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar py-2 px-4">
+        <div class="flex justify-around items-center">
+            <a href="home.html" class="flex flex-col items-center">
+                <i class="fas fa-home text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.home">首页</span>
+            </a>
+            <a href="books.html" class="flex flex-col items-center">
+                <i class="fas fa-book text-purple-600 text-lg"></i>
+                <span class="text-xs text-purple-600 font-medium mt-1" data-i18n="nav.books">书籍</span>
+            </a>
+            <a href="home.html" class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
+                    <i class="fas fa-play text-white text-lg"></i>
+                </div>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.practice">学习</span>
+            </a>
+            <a href="leaderboard.html" class="flex flex-col items-center">
+                <i class="fas fa-trophy text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.achievements">成就</span>
+            </a>
+            <a href="profile.html" class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.profile">我的</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 语言切换功能
+        let currentLanguage = 'zh';
+        let translations = {};
+        
+        async function loadTranslations(lang) {
+            try {
+                const response = await fetch(`${lang}.json`);
+                translations = await response.json();
+                updatePageContent();
+            } catch (error) {
+                console.error('Failed to load translations:', error);
+            }
+        }
+        
+        function updatePageContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[key]) {
+                    element.textContent = translations[key];
+                }
+            });
+        }
+        
+        // 初始加载
+        loadTranslations(currentLanguage);
+    </script>
+</body>
+</html>

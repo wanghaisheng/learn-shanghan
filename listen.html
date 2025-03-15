@@ -108,9 +108,9 @@
         <!-- 顶部导航 -->
         <div class="bg-white p-4 shadow-sm sticky top-0 z-10">
             <div class="flex justify-between items-center">
-                <button class="p-2">
+                <a href="home.html" class="p-2">
                     <i class="fas fa-arrow-left text-gray-600"></i>
-                </button>
+                </a>
                 <div class="text-center">
                     <h1 class="text-lg font-bold text-gray-800" data-i18n="listen.mode">听力模式</h1>
                     <p class="text-sm text-gray-500">《伤寒杂病论》- 平脉法第一 (1.1)</p>
@@ -131,6 +131,34 @@
                 </div>
                 <div class="progress-bar">
                     <div class="progress-bar-fill" style="width: 10%;"></div>
+                </div>
+            </div>
+            
+            <!-- 模式信息 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-gray-800">第32天 - 听力模式</h3>
+                        <p class="text-sm text-gray-600">平脉法第十 (5.3)</p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-2">
+                            <i class="fas fa-headphones text-purple-600"></i>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
+                            <i class="fas fa-trophy text-white text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 text-sm">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">完成此模式可获得:</span>
+                        <span class="text-purple-600 font-medium">+25积分</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-1">
+                        <span class="text-gray-600">全部模式完成额外奖励:</span>
+                        <span class="text-purple-600 font-medium">+75积分</span>
+                    </div>
                 </div>
             </div>
             
@@ -233,9 +261,9 @@
                         <i class="fas fa-redo mr-1"></i>
                         重听
                     </button>
-                    <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium" data-i18n="listen.continue">
-                        继续
-                        <i class="fas fa-arrow-right ml-1"></i>
+                    <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium" id="completeButton">
+                        <span data-i18n="listen.complete">完成学习</span>
+                        <i class="fas fa-check ml-1"></i>
                     </button>
                 </div>
             </div>
@@ -245,28 +273,28 @@
     <!-- 底部标签栏 -->
     <div class="tab-bar py-2 px-4">
         <div class="flex justify-around items-center">
-            <div class="flex flex-col items-center">
+            <a href="home.html" class="flex flex-col items-center">
                 <i class="fas fa-home text-gray-400 text-lg"></i>
                 <span class="text-xs text-gray-400 mt-1" data-i18n="nav.home">首页</span>
-            </div>
-            <div class="flex flex-col items-center">
+            </a>
+            <a href="books.html" class="flex flex-col items-center">
                 <i class="fas fa-book text-gray-400 text-lg"></i>
                 <span class="text-xs text-gray-400 mt-1" data-i18n="nav.books">书籍</span>
-            </div>
-            <div class="flex flex-col items-center">
+            </a>
+            <a href="book-detail.html" class="flex flex-col items-center">
                 <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
                     <i class="fas fa-play text-white text-lg"></i>
                 </div>
                 <span class="text-xs text-gray-400 mt-1" data-i18n="nav.practice">学习</span>
-            </div>
-            <div class="flex flex-col items-center">
+            </a>
+            <a href="leaderboard.html" class="flex flex-col items-center">
                 <i class="fas fa-trophy text-gray-400 text-lg"></i>
                 <span class="text-xs text-gray-400 mt-1" data-i18n="nav.achievements">成就</span>
-            </div>
-            <div class="flex flex-col items-center">
+            </a>
+            <a href="profile.html" class="flex flex-col items-center">
                 <i class="fas fa-user text-gray-400 text-lg"></i>
                 <span class="text-xs text-gray-400 mt-1" data-i18n="nav.profile">我的</span>
-            </div>
+            </a>
         </div>
     </div>
 
@@ -311,6 +339,20 @@
                 playPauseIcon.classList.remove('fa-pause');
                 playPauseIcon.classList.add('fa-play');
             }
+        });
+        
+        // 模式完成按钮
+        const completeButton = document.getElementById('completeButton');
+        completeButton.addEventListener('click', () => {
+            // 显示完成动画
+            completeButton.innerHTML = '<i class="fas fa-check-circle mr-1"></i> 已完成 +25分';
+            completeButton.classList.add('bg-green-500');
+            completeButton.classList.remove('from-purple-600', 'to-pink-600');
+            
+            // 两秒后返回到书籍详情页
+            setTimeout(() => {
+                window.location.href = 'book-detail.html';
+            }, 2000);
         });
     </script>
 </body>

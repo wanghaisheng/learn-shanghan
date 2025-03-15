@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="statistics.title">学习统计 - 听说读写学伤寒</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F7F8FC;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .stats-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content pb-20">
+        <!-- 顶部导航 -->
+        <div class="bg-white p-4 shadow-sm sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <a href="home.html" class="p-2">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </a>
+                <div class="text-center">
+                    <h1 class="text-lg font-bold text-gray-800" data-i18n="statistics.title">学习统计</h1>
+                </div>
+                <button class="p-2">
+                    <i class="fas fa-ellipsis-v text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="p-4">
+            <!-- 总体统计 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <h2 class="text-lg font-bold text-gray-800 mb-4" data-i18n="statistics.overview">总体统计</h2>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="text-center">
+                        <p class="text-sm text-gray-500 mb-1" data-i18n="home.totalTime">总学习时间</p>
+                        <p class="text-2xl font-bold text-gray-800">12.5 小时</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm text-gray-500 mb-1" data-i18n="home.totalChars">已学习字数</p>
+                        <p class="text-2xl font-bold text-gray-800">4,520 字</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm text-gray-500 mb-1" data-i18n="home.streak">学习连续天数</p>
+                        <p class="text-2xl font-bold text-gray-800">7 天</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-sm text-gray-500 mb-1" data-i18n="home.accuracy">总体准确率</p>
+                        <p class="text-2xl font-bold text-gray-800">92.8%</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 学习趋势 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <h2 class="text-lg font-bold text-gray-800 mb-4" data-i18n="statistics.trends">学习趋势</h2>
+                <div class="h-48 bg-gray-50 rounded-lg mb-4 p-4 flex items-end space-x-2">
+                    <!-- 模拟柱状图 -->
+                    <div class="h-20 w-8 bg-blue-500 rounded-t-md"></div>
+                    <div class="h-32 w-8 bg-blue-500 rounded-t-md"></div>
+                    <div class="h-24 w-8 bg-blue-500 rounded-t-md"></div>
+                    <div class="h-36 w-8 bg-blue-500 rounded-t-md"></div>
+                    <div class="h-28 w-8 bg-blue-500 rounded-t-md"></div>
+                    <div class="h-40 w-8 bg-blue-500 rounded-t-md"></div>
+                    <div class="h-30 w-8 bg-blue-500 rounded-t-md"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-500">
+                    <span>周一</span>
+                    <span>周二</span>
+                    <span>周三</span>
+                    <span>周四</span>
+                    <span>周五</span>
+                    <span>周六</span>
+                    <span>周日</span>
+                </div>
+            </div>
+            
+            <!-- 学习模式比例 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <h2 class="text-lg font-bold text-gray-800 mb-4" data-i18n="statistics.modeDist">学习模式比例</h2>
+                <div class="flex space-x-4 mb-4">
+                    <div class="flex-1 bg-purple-100 p-3 rounded-lg text-center">
+                        <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-headphones text-white"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800">听</h3>
+                        <p class="text-lg font-bold text-purple-500">35%</p>
+                    </div>
+                    <div class="flex-1 bg-blue-100 p-3 rounded-lg text-center">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-microphone-alt text-white"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800">说</h3>
+                        <p class="text-lg font-bold text-blue-500">20%</p>
+                    </div>
+                    <div class="flex-1 bg-green-100 p-3 rounded-lg text-center">
+                        <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-book-reader text-white"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800">读</h3>
+                        <p class="text-lg font-bold text-green-500">30%</p>
+                    </div>
+                    <div class="flex-1 bg-red-100 p-3 rounded-lg text-center">
+                        <div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-pen-fancy text-white"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-800">写</h3>
+                        <p class="text-lg font-bold text-red-500">15%</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 书籍进度 -->
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-gray-800" data-i18n="statistics.bookProgress">书籍进度</h2>
+                    <a href="books.html" class="text-sm font-medium text-purple-600" data-i18n="home.viewAll">查看全部</a>
+                </div>
+                <div class="space-y-4">
+                    <div class="stats-card p-3 bg-gray-50 rounded-lg">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-gray-800">《伤寒杂病论》</h3>
+                            <span class="text-sm font-medium text-purple-600">32%</span>
+                        </div>
+                        <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full" style="width: 32%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar py-2 px-4">
+        <div class="flex justify-around items-center">
+            <a href="home.html" class="flex flex-col items-center">
+                <i class="fas fa-home text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.home">首页</span>
+            </a>
+            <a href="books.html" class="flex flex-col items-center">
+                <i class="fas fa-book text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.books">书籍</span>
+            </a>
+            <a href="book-detail.html" class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
+                    <i class="fas fa-play text-white text-lg"></i>
+                </div>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.practice">学习</span>
+            </a>
+            <a href="leaderboard.html" class="flex flex-col items-center">
+                <i class="fas fa-trophy text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.achievements">成就</span>
+            </a>
+            <a href="profile.html" class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.profile">我的</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 语言切换功能
+        let currentLanguage = 'zh';
+        let translations = {};
+        
+        async function loadTranslations(lang) {
+            try {
+                const response = await fetch(`${lang}.json`);
+                translations = await response.json();
+                updatePageContent();
+            } catch (error) {
+                console.error('Failed to load translations:', error);
+            }
+        }
+        
+        function updatePageContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[key]) {
+                    element.textContent = translations[key];
+                }
+            });
+        }
+        
+        // 初始加载
+        loadTranslations(currentLanguage);
+    </script>
+</body>
+</html>

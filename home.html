@@ -74,7 +74,7 @@
                     </svg>
                     <div class="ml-3">
                         <h1 class="text-lg font-bold text-gray-800" data-i18n="home.welcome">你好，学习者</h1>
-                        <p class="text-sm text-gray-500" data-i18n="home.streak">🔥 已连续学习 7 天</p>
+                        <p class="text-sm text-gray-500" data-i18n="home.streak">已连续学习 7 天</p>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -92,7 +92,10 @@
         <div class="px-4 py-6">
             <div class="bg-white rounded-xl shadow-sm p-5">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-bold text-gray-800" data-i18n="home.todayProgress">今日学习进度</h2>
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-800" data-i18n="home.todayProgress">今日学习进度</h2>
+                        <p class="text-sm text-gray-500">《伤寒杂病论》(主要学习计划)</p>
+                    </div>
                     <span class="text-sm font-medium text-purple-600" data-i18n="home.dailyGoal">日目标: 150字</span>
                 </div>
                 <div class="progress-bar mb-3">
@@ -104,7 +107,7 @@
                 </div>
                 <button class="w-full mt-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-medium hover:from-purple-700 hover:to-pink-700 transition duration-300 flex justify-center items-center">
                     <i class="fas fa-play-circle mr-2"></i>
-                    <span data-i18n="home.continueStudy">继续今日学习</span>
+                    <a href="book-detail.html" class="w-full text-center" data-i18n="home.continueStudy">继续今日学习</a>
                 </button>
             </div>
         </div>
@@ -113,7 +116,7 @@
         <div class="px-4 py-2">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-lg font-bold text-gray-800" data-i18n="home.myBooks">我的学习书籍</h2>
-                <button class="text-sm font-medium text-purple-600" data-i18n="home.viewAll">查看全部</button>
+                <a href="books.html" class="text-sm font-medium text-purple-600" data-i18n="home.viewAll">查看全部</a>
             </div>
             
             <div class="overflow-x-auto pb-4 flex space-x-4">
@@ -145,15 +148,16 @@
                             <div class="progress-bar-fill" style="width: 32%;"></div>
                         </div>
                         <p class="text-sm text-gray-600 mb-4">当前学习: 平脉法第一 (1.1)</p>
+                        <p class="text-sm text-purple-600 mb-2">总进度: 第32天 / 共365天</p>
                         <button class="w-full bg-indigo-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition duration-300">
-                            <span data-i18n="home.continue">继续学习</span>
+                            <a href="book-detail.html" class="w-full block" data-i18n="home.continue">继续学习</a>
                         </button>
                     </div>
                 </div>
                 
                 <!-- 金匮要略 -->
                 <div class="book-card bg-white shadow-sm flex-shrink-0" style="width: 240px;">
-                    <div class="h-32 bg-gradient-to-r from-yellow-500 to-orange-600 p-4 flex flex-col justify!-end">
+                    <div class="h-32 bg-gradient-to-r from-yellow-500 to-orange-600 p-4 flex flex-col justify-end">
                         <h3 class="text-white font-bold">《金匮要略》</h3>
                         <p class="text-white text-sm opacity-90">经典原文</p>
                     </div>
@@ -167,7 +171,7 @@
                         </div>
                         <p class="text-sm text-gray-600 mb-4">尚未开始学习</p>
                         <button class="w-full bg-orange-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-orange-700 transition duration-300">
-                            <span data-i18n="home.start">开始学习</span>
+                            <a href="books.html" class="w-full block" data-i18n="home.start">开始学习</a>
                         </button>
                     </div>
                 </div>
@@ -205,50 +209,66 @@
             <div class="grid grid-cols-2 gap-4">
                 <!-- 听力挑战 -->
                 <div class="challenge-card bg-white shadow-sm p-4">
-                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-3">
-                        <i class="fas fa-headphones text-purple-600"></i>
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                            <i class="fas fa-headphones text-purple-600"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 px-2 py-1 bg-gray-100 rounded-full">《伤寒杂病论》</span>
                     </div>
                     <h3 class="font-bold text-gray-800 mb-1">听</h3>
                     <p class="text-sm text-gray-600 mb-4" data-i18n="home.listenChallenge">听力强化训练</p>
-                    <button class="w-full bg-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition duration-300">
+                    <p class="text-xs text-gray-500 mb-2">第32天: 平脉法第十 (5.3)</p>
+                    <a href="listen.html" class="block w-full bg-purple-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition duration-300 text-center">
                         <span data-i18n="home.start">开始</span>
-                    </button>
+                    </a>
                 </div>
                 
                 <!-- 口语挑战 -->
                 <div class="challenge-card bg-white shadow-sm p-4">
-                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-3">
-                        <i class="fas fa-microphone-alt text-blue-600"></i>
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-microphone-alt text-blue-600"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 px-2 py-1 bg-gray-100 rounded-full">《伤寒杂病论》</span>
                     </div>
                     <h3 class="font-bold text-gray-800 mb-1">说</h3>
                     <p class="text-sm text-gray-600 mb-4" data-i18n="home.speakChallenge">口语表达训练</p>
-                    <button class="w-full bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition duration-300">
+                    <p class="text-xs text-gray-500 mb-2">第32天: 平脉法第十 (5.3)</p>
+                    <a href="speak.html" class="block w-full bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition duration-300 text-center">
                         <span data-i18n="home.start">开始</span>
-                    </button>
+                    </a>
                 </div>
                 
                 <!-- 阅读挑战 -->
                 <div class="challenge-card bg-white shadow-sm p-4">
-                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-3">
-                        <i class="fas fa-book-reader text-green-600"></i>
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-book-reader text-green-600"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 px-2 py-1 bg-gray-100 rounded-full">《金匮要略》</span>
                     </div>
                     <h3 class="font-bold text-gray-800 mb-1">读</h3>
                     <p class="text-sm text-gray-600 mb-4" data-i18n="home.readChallenge">阅读理解训练</p>
-                    <button class="w-full bg-green-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition duration-300">
+                    <p class="text-xs text-gray-500 mb-2">第1天: 第一章 (1.1)</p>
+                    <a href="read.html" class="block w-full bg-green-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition duration-300 text-center">
                         <span data-i18n="home.start">开始</span>
-                    </button>
+                    </a>
                 </div>
                 
                 <!-- 书写挑战 -->
                 <div class="challenge-card bg-white shadow-sm p-4">
-                    <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mb-3">
-                        <i class="fas fa-pen-fancy text-red-600"></i>
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                            <i class="fas fa-pen-fancy text-red-600"></i>
+                        </div>
+                        <span class="text-xs text-gray-500 px-2 py-1 bg-gray-100 rounded-full">《黄帝内经素问》</span>
                     </div>
                     <h3 class="font-bold text-gray-800 mb-1">写</h3>
                     <p class="text-sm text-gray-600 mb-4" data-i18n="home.writeChallenge">书写记忆训练</p>
-                    <button class="w-full bg-red-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition duration-300">
+                    <p class="text-xs text-gray-500 mb-2">第1天: 第一章 (1.1)</p>
+                    <a href="write.html" class="block w-full bg-red-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition duration-300 text-center">
                         <span data-i18n="home.start">开始</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -256,7 +276,10 @@
         <!-- 学习统计 -->
         <div class="px-4 py-2">
             <div class="bg-white rounded-xl shadow-sm p-5">
-                <h2 class="text-lg font-bold text-gray-800 mb-4" data-i18n="home.myStats">我的学习统计</h2>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-gray-800" data-i18n="home.myStats">我的学习统计</h2>
+                    <a href="statistics.html" class="text-sm font-medium text-purple-600">查看详情</a>
+                </div>
                 <div class="grid grid-cols-2 gap-6">
                     <div class="text-center">
                         <p class="text-sm text-gray-500 mb-1" data-i18n="home.totalTime">总学习时间</p>
@@ -275,9 +298,9 @@
                         <p class="text-2xl font-bold text-gray-800">92.8%</p>
                     </div>
                 </div>
-                <button class="w-full mt-4 border border-purple-600 text-purple-600 py-2 rounded-lg font-medium hover:bg-purple-50 transition duration-300" data-i18n="home.viewDetailedStats">
-                    查看详细统计
-                </button>
+                <a href="statistics.html" class="w-full mt-4 border border-purple-600 text-purple-600 py-2 rounded-lg font-medium hover:bg-purple-50 transition duration-300 flex justify-center items-center">
+                    <span data-i18n="home.viewDetailedStats">查看详细统计</span>
+                </a>
             </div>
         </div>
         
@@ -297,33 +320,34 @@
                 </div>
             </div>
         </div>
+        
     </div>
     
     <!-- 底部标签栏 -->
     <div class="tab-bar py-2 px-4">
         <div class="flex justify-around items-center">
-            <div class="flex flex-col items-center">
+            <a href="home.html" class="flex flex-col items-center">
                 <i class="fas fa-home text-purple-600 text-lg"></i>
                 <span class="text-xs text-purple-600 font-medium mt-1" data-i18n="nav.home">首页</span>
-            </div>
-            <div class="flex flex-col items-center">
+            </a>
+            <a href="books.html" class="flex flex-col items-center">
                 <i class="fas fa-book text-gray-400 text-lg"></i>
                 <span class="text-xs text-gray-400 mt-1" data-i18n="nav.books">书籍</span>
-            </div>
-            <div class="flex flex-col items-center">
+            </a>
+            <a href="book-detail.html" class="flex flex-col items-center">
                 <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
                     <i class="fas fa-play text-white text-lg"></i>
                 </div>
                 <span class="text-xs text-gray-400 mt-1" data-i18n="nav.practice">学习</span>
-            </div>
-            <div class="flex flex-col items-center">
+            </a>
+            <a href="leaderboard.html" class="flex flex-col items-center">
                 <i class="fas fa-trophy text-gray-400 text-lg"></i>
                 <span class="text-xs text-gray-400 mt-1" data-i18n="nav.achievements">成就</span>
-            </div>
-            <div class="flex flex-col items-center">
+            </a>
+            <a href="profile.html" class="flex flex-col items-center">
                 <i class="fas fa-user text-gray-400 text-lg"></i>
                 <span class="text-xs text-gray-400 mt-1" data-i18n="nav.profile">我的</span>
-            </div>
+            </a>
         </div>
     </div>
 
@@ -353,6 +377,18 @@
         
         // 初始加载
         loadTranslations(currentLanguage);
+        
+        // 设置进度条动画效果
+        setTimeout(() => {
+            const progressBars = document.querySelectorAll('.progress-bar-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        }, 500);
     </script>
 </body>
 </html>
