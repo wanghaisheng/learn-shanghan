@@ -102,6 +102,14 @@
             color: white;
         }
     </style>
+    <script type="module">
+        import { initPremiumFeatures } from './premium.js';
+        
+        // Initialize premium features when document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initPremiumFeatures();
+        });
+    </script>
 </head>
 <body>
     <div class="main-content pb-20">
@@ -113,7 +121,7 @@
                 </a>
                 <div class="text-center">
                     <h1 class="text-lg font-bold text-gray-800" data-i18n="listen.mode">听力模式</h1>
-                    <p class="text-sm text-gray-500">《伤寒杂病论》- 平脉法第一 (1.1)</p>
+                    <p class="text-sm text-gray-500">《伤寒杂病论》- 太阳病脉证 (2.30)</p>
                 </div>
                 <button class="p-2">
                     <i class="fas fa-ellipsis-v text-gray-600"></i>
@@ -256,15 +264,41 @@
                     </div>
                 </div>
                 
-                <div class="flex justify-end mt-8">
-                    <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg mr-3" data-i18n="listen.repeat">
-                        <i class="fas fa-redo mr-1"></i>
-                        重听
-                    </button>
-                    <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium" id="completeButton">
-                        <span data-i18n="listen.complete">完成学习</span>
-                        <i class="fas fa-check ml-1"></i>
-                    </button>
+                <div class="px-6 pb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-gray-800 mb-2" data-i18n="listen.recognitionResult">识别结果</h3>
+                        <p class="text-gray-700">形色气味，脹大自靈，脈有三部，闔以候人</p>
+                    </div>
+                    
+                    <!-- Premium Feature Area -->
+                    <div class="mt-4 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-xl p-4 border border-yellow-200 premium-feature-listen">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 mr-4">
+                                <i class="fas fa-crown text-yellow-600"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="font-medium text-gray-800">高级语音分析</h4>
+                                <p class="text-sm text-gray-600 mb-2">AI智能分析发音细节，提供专业改进建议</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs text-gray-500">免费试用次数: <span class="trial-usage font-medium text-yellow-600">2/3</span></span>
+                                    <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm font-medium">
+                                        试用高级功能
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 flex justify-between">
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg mr-3" data-i18n="listen.repeat">
+                            <i class="fas fa-redo mr-1"></i>
+                            重听
+                        </button>
+                        <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium" id="completeButton">
+                            <span data-i18n="listen.complete">完成学习</span>
+                            <i class="fas fa-check ml-1"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习阶段 - 听说读写学伤寒</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F7F8FC;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .stage-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stage-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .completed-mode {
+            color: #10B981;
+            position: relative;
+        }
+        
+        .completed-mode i {
+            position: absolute;
+            right: -5px;
+            top: -5px;
+            font-size: 10px;
+            background-color: #10B981;
+            color: white;
+            border-radius: 50%;
+            padding: 2px;
+        }
+        
+        .locked-stage {
+            filter: grayscale(1);
+            opacity: 0.6;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #E2E8F0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8A2387, #E94057, #F27121);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content pb-20">
+        <!-- 顶部导航 -->
+        <div class="bg-white p-4 shadow-sm sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <a href="levels.html" class="p-2">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </a>
+                <div class="text-center">
+                    <h1 class="text-lg font-bold text-gray-800">第32天学习阶段</h1>
+                    <p class="text-sm text-gray-500">《伤寒杂病论》- 太阳病脉证 (2.30)</p>
+                </div>
+                <button class="p-2">
+                    <i class="fas fa-ellipsis-v text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 关卡信息和进度 -->
+        <div class="px-4 pt-4">
+            <div class="bg-white rounded-xl shadow-sm p-5 mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="font-bold text-gray-800">第32天进度</h2>
+                    <span class="text-sm font-medium text-purple-600">总共3个学习阶段</span>
+                </div>
+                <div class="progress-bar mb-3">
+                    <div class="progress-bar-fill" style="width: 33%;"></div>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-600">已完成：1/3阶段</span>
+                    <span class="text-gray-600">预计剩余时间：25分钟</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 学习阶段列表 -->
+        <div class="px-4 pb-16">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">学习阶段</h2>
+            
+            <div class="space-y-4">
+                <!-- 已完成阶段 -->
+                <div class="stage-card bg-white rounded-xl shadow-sm p-5 border-l-4 border-green-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-gray-800">早上学习阶段</h3>
+                        <span class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">已完成</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">建议时间：08:00 - 09:00</p>
+                    
+                    <div class="grid grid-cols-4 gap-2">
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-1 completed-mode">
+                                <i class="fas fa-headphones text-purple-600"></i>
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">听</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-1 completed-mode">
+                                <i class="fas fa-microphone-alt text-blue-600"></i>
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">说</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-1 completed-mode">
+                                <i class="fas fa-book-reader text-green-600"></i>
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">读</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mb-1 completed-mode">
+                                <i class="fas fa-pen-fancy text-red-600"></i>
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">写</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-right">
+                        <span class="text-sm text-green-600">获得：+50积分</span>
+                    </div>
+                </div>
+                
+                <!-- 当前阶段 -->
+                <div class="stage-card bg-white rounded-xl shadow-sm p-5 border-l-4 border-purple-500">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-gray-800">下午学习阶段</h3>
+                        <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">进行中</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">建议时间：14:00 - 15:00</p>
+                    
+                    <div class="grid grid-cols-4 gap-2">
+                        <a href="listen.html" class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-headphones text-purple-600"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">听</span>
+                        </a>
+                        <a href="speak.html" class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-microphone-alt text-blue-600"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">说</span>
+                        </a>
+                        <a href="read.html" class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-book-reader text-green-600"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">读</span>
+                        </a>
+                        <a href="write.html" class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-pen-fancy text-red-600"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">写</span>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-4 text-right">
+                        <span class="text-sm text-gray-600">完成可获得：+50积分</span>
+                    </div>
+                </div>
+                
+                <!-- 未解锁阶段 -->
+                <div class="stage-card bg-white rounded-xl shadow-sm p-5 border-l-4 border-gray-300 locked-stage">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-gray-800">晚上学习阶段</h3>
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">未解锁</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">建议时间：20:00 - 21:00</p>
+                    <p class="text-sm text-gray-500">完成下午学习阶段后解锁</p>
+                    
+                    <div class="grid grid-cols-4 gap-2 opacity-50">
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-headphones text-purple-600"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">听</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-microphone-alt text-blue-600"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">说</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-book-reader text-green-600"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">读</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mb-1">
+                                <i class="fas fa-pen-fancy text-red-600"></i>
+                            </div>
+                            <span class="text-xs text-gray-600">写</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-right">
+                        <span class="text-sm text-gray-400">完成可获得：+50积分</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-purple-50 rounded-xl p-5 border border-purple-100">
+                <h3 class="font-bold text-gray-800 mb-3">会员特权</h3>
+                <p class="text-sm text-gray-700 mb-4">成为会员可自定义每个关卡的学习阶段数量（1-9个），增加学习强度和记忆巩固效果。</p>
+                <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium w-full">
+                    升级会员
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar py-2 px-4">
+        <div class="flex justify-around items-center">
+            <a href="home.html" class="flex flex-col items-center">
+                <i class="fas fa-home text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">首页</span>
+            </a>
+            <a href="books.html" class="flex flex-col items-center">
+                <i class="fas fa-book text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">书籍</span>
+            </a>
+            <a href="next-task.html" class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
+                    <i class="fas fa-play text-white text-lg"></i>
+                </div>
+                <span class="text-xs text-purple-600 font-medium mt-1">学习</span>
+            </a>
+            <a href="leaderboard.html" class="flex flex-col items-center">
+                <i class="fas fa-trophy text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">成就</span>
+            </a>
+            <a href="profile.html" class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">我的</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

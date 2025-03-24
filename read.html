@@ -99,6 +99,14 @@
             transform: translateY(-2px);
         }
     </style>
+    <script type="module">
+        import { initPremiumFeatures } from './premium.js';
+        
+        // Initialize premium features when document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initPremiumFeatures();
+        });
+    </script>
 </head>
 <body>
     <div class="main-content pb-20">
@@ -214,6 +222,25 @@
                     <button class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-medium" data-i18n="read.revealAll">
                         全部揭示
                     </button>
+                </div>
+                
+                <!-- Premium Feature Area -->
+                <div class="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-200 premium-feature-read">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mr-4">
+                            <i class="fas fa-crown text-blue-600"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="font-medium text-gray-800">记忆增强模式</h4>
+                            <p class="text-sm text-gray-600 mb-2">启用间隔重复提示，智能记忆曲线算法，提升记忆效率50%</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500">免费试用次数: <span class="trial-usage font-medium text-blue-600">3/3</span></span>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm font-medium">
+                                    试用高级功能
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             

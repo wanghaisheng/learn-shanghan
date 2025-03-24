@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定制学习计划 - 听说读写学伤寒</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F7F8FC;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .form-section {
+            background-color: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .slider-input {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #E2E8F0;
+            outline: none;
+        }
+        
+        .slider-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8A2387, #E94057);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slider-input::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8A2387, #E94057);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content pb-20">
+        <!-- 顶部导航 -->
+        <div class="bg-white p-4 shadow-sm sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <a href="learn-plans.html" class="p-2">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </a>
+                <div class="text-center">
+                    <h1 class="text-lg font-bold text-gray-800">定制学习计划</h1>
+                    <p class="text-sm text-gray-500">《伤寒杂病论》- 桂林古本</p>
+                </div>
+                <button class="p-2">
+                    <i class="fas fa-ellipsis-v text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="p-4">
+            <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl p-5 text-white mb-6">
+                <h2 class="font-bold text-xl mb-3">会员专享功能</h2>
+                <p class="mb-3">根据您的学习节奏和偏好，定制专属学习计划，提升学习效率。</p>
+                <div class="flex items-center">
+                    <i class="fas fa-crown text-yellow-300 mr-2"></i>
+                    <span>高级会员专享</span>
+                </div>
+            </div>
+            
+            <!-- 学习计划定制表单 -->
+            <form>
+                <!-- 总天数设置 -->
+                <div class="form-section">
+                    <h3 class="font-bold text-gray-800 mb-4">总学习天数</h3>
+                    <div class="mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-600">选择天数</span>
+                            <span class="font-medium text-purple-600" id="days-display">180天</span>
+                        </div>
+                        <input type="range" min="30" max="365" value="180" class="slider-input" id="days-slider">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>30天</span>
+                            <span>365天</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">根据选择的总天数，系统会自动调整每天的学习内容量。天数越多，每天学习内容越少，适合长期记忆。</p>
+                </div>
+                
+                <!-- 每关学习阶段设置 -->
+                <div class="form-section">
+                    <h3 class="font-bold text-gray-800 mb-4">每关学习阶段</h3>
+                    <div class="mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-600">学习阶段数量</span>
+                            <span class="font-medium text-purple-600" id="stages-display">3阶段</span>
+                        </div>
+                        <input type="range" min="1" max="9" value="3" class="slider-input" id="stages-slider">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>1阶段</span>
+                            <span>9阶段</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">阶段数量越多，每天的重复练习次数越多，加深记忆效果。建议根据个人学习时间设置。</p>
+                </div>
+                
+                <!-- 学习时间分布 -->
+                <div class="form-section">
+                    <h3 class="font-bold text-gray-800 mb-4">学习时间分布</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="morning" checked class="rounded text-purple-600 focus:ring-purple-500 h-4 w-4">
+                            <label for="morning" class="ml-2 text-gray-700">早上 (06:00 - 12:00)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="afternoon" checked class="rounded text-purple-600 focus:ring-purple-500 h-4 w-4">
+                            <label for="afternoon" class="ml-2 text-gray-700">下午 (12:00 - 18:00)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="evening" checked class="rounded text-purple-600 focus:ring-purple-500 h-4 w-4">
+                            <label for="evening" class="ml-2 text-gray-700">晚上 (18:00 - 22:00)</label>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-3">选择您方便学习的时间段，系统会在这些时间段内为您安排学习提醒。</p>
+                </div>
+                
+                <!-- 计划名称 -->
+                <div class="form-section">
+                    <h3 class="font-bold text-gray-800 mb-4">计划名称</h3>
+                    <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="我的专属计划" value="伤寒论精读计划">
+                    <p class="text-sm text-gray-600 mt-3">为您的学习计划取一个名字，方便在多个计划中识别。</p>
+                </div>
+                
+                <!-- 每天提醒 -->
+                <div class="form-section">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-gray-800">学习提醒</h3>
+                        <label class="switch relative inline-block w-12 h-6">
+                            <input type="checkbox" checked>
+                            <span class="slider absolute cursor-pointer rounded-full bg-gray-300 top-0 left-0 right-0 bottom-0 transition-all duration-300 before:absolute before:content-[''] before:h-4 before:w-4 before:left-1 before:bottom-1 before:bg-white before:rounded-full before:transition-all before:duration-300"></span>
+                        </label>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-3">开启后，系统会根据您的学习时间分布，在合适的时间发送提醒。</p>
+                </div>
+                
+                <!-- 提交按钮 -->
+                <div class="mt-8">
+                    <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-medium shadow-lg hover:shadow-xl transition duration-300">
+                        创建学习计划
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar py-2 px-4">
+        <div class="flex justify-around items-center">
+            <a href="home.html" class="flex flex-col items-center">
+                <i class="fas fa-home text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">首页</span>
+            </a>
+            <a href="books.html" class="flex flex-col items-center">
+                <i class="fas fa-book text-purple-600 text-lg"></i>
+                <span class="text-xs text-purple-600 font-medium mt-1">书籍</span>
+            </a>
+            <a href="next-task.html" class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
+                    <i class="fas fa-play text-white text-lg"></i>
+                </div>
+                <span class="text-xs text-gray-400 mt-1">学习</span>
+            </a>
+            <a href="leaderboard.html" class="flex flex-col items-center">
+                <i class="fas fa-trophy text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">成就</span>
+            </a>
+            <a href="profile.html" class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">我的</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 滑块值实时显示
+        const daysSlider = document.getElementById('days-slider');
+        const daysDisplay = document.getElementById('days-display');
+        const stagesSlider = document.getElementById('stages-slider');
+        const stagesDisplay = document.getElementById('stages-display');
+        
+        daysSlider.oninput = function() {
+            daysDisplay.textContent = this.value + '天';
+        }
+        
+        stagesSlider.oninput = function() {
+            stagesDisplay.textContent = this.value + '阶段';
+        }
+        
+        // 开关样式
+        document.querySelector('input[type="checkbox"]').addEventListener('change', function() {
+            if (this.checked) {
+                document.querySelector('.slider').classList.add('bg-purple-600');
+                document.querySelector('.slider').classList.remove('bg-gray-300');
+                document.querySelector('.slider').classList.add('before:translate-x-6');
+            } else {
+                document.querySelector('.slider').classList.remove('bg-purple-600');
+                document.querySelector('.slider').classList.add('bg-gray-300');
+                document.querySelector('.slider').classList.remove('before:translate-x-6');
+            }
+        });
+        
+        // 初始化开关状态
+        if (document.querySelector('input[type="checkbox"]').checked) {
+            document.querySelector('.slider').classList.add('bg-purple-600');
+            document.querySelector('.slider').classList.remove('bg-gray-300');
+            document.querySelector('.slider').classList.add('before:translate-x-6');
+        }
+    </script>
+</body>
+</html>

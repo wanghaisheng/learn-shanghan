@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="book.info.title">书籍详情 - 听说读写学伤寒</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F7F8FC;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .book-cover {
+            height: 200px;
+            background: linear-gradient(135deg, #3B82F6, #4F46E5);
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px 16px 0 0;
+        }
+        
+        .book-cover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            z-index: 1;
+        }
+        
+        .book-info {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .plan-card {
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chapter-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content pb-20">
+        <!-- 顶部导航 -->
+        <div class="bg-white p-4 shadow-sm sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <a href="books.html" class="p-2">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </a>
+                <div class="text-center">
+                    <h1 class="text-lg font-bold text-gray-800">《伤寒杂病论》</h1>
+                    <p class="text-sm text-gray-500">桂林古本</p>
+                </div>
+                <button class="p-2">
+                    <i class="fas fa-ellipsis-v text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 书籍封面和详情 -->
+        <div class="bg-white shadow-md rounded-b-xl mb-6">
+            <div class="book-cover p-6 flex flex-col justify-end">
+                <div class="book-info text-white">
+                    <h2 class="text-2xl font-bold mb-1">《伤寒杂病论》</h2>
+                    <p class="opacity-90">桂林古本</p>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-user-edit text-blue-600"></i>
+                        </div>
+                        <span class="text-gray-700">张仲景</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-book text-purple-600"></i>
+                        </div>
+                        <span class="text-gray-700">东汉末年</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-sm text-gray-600">4.8 (1,280评价)</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-user-graduate text-gray-500 mr-2"></i>
+                        <span class="text-sm text-gray-600">10,000+人正在学习</span>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-100 pt-6">
+                    <h3 class="font-bold text-gray-800 mb-4">书籍简介</h3>
+                    <p class="text-gray-600 mb-4">《伤寒杂病论》是东汉末年医家张仲景所著的一部医学经典著作，是中医辨证论治体系的奠基之作。全书共分《伤寒论》和《金匮要略》两部分，系统地论述了外感热病和杂病（内科疾病）的诊断与治疗原则。</p>
+                    <p class="text-gray-600">本书共十卷，三百九十七法，记载了大量有效的治病验方，为后世医家治疗疾病提供了丰富的经验。其"六经辨证"的方法，对后世医学发展产生了深远影响，被誉为"方书之祖"，是中医必读经典之一。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 学习计划 -->
+        <div class="bg-white shadow-md rounded-xl p-6 mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-gray-800 mb-4">选择学习计划</h3>
+                <a href="learn-plans.html" class="text-sm text-purple-600 font-medium">查看所有计划</a>
+            </div>
+            <p class="text-gray-600 mb-6">根据您的时间和学习节奏，选择适合的学习计划</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- 精简计划 -->
+                <div class="plan-card bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 p-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-bold text-gray-800">精简计划</h4>
+                        <span class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">推荐</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">总天数：</span>
+                        <span class="font-medium text-gray-800">90天</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">每日学习量：</span>
+                        <span class="font-medium text-gray-800">~15分钟</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-gray-600">适合人群：</span>
+                        <span class="font-medium text-gray-800">忙碌学习者</span>
+                    </div>
+                    <a href="learn-plans.html" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded-lg transition duration-300">
+                        选择学习计划
+                    </a>
+                </div>
+                
+                <!-- 标准计划 -->
+                <div class="plan-card bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 p-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-bold text-gray-800">标准计划</h4>
+                        <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">平衡</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">总天数：</span>
+                        <span class="font-medium text-gray-800">180天</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">每日学习量：</span>
+                        <span class="font-medium text-gray-800">~10分钟</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-gray-600">适合人群：</span>
+                        <span class="font-medium text-gray-800">普通学习者</span>
+                    </div>
+                    <a href="learn-plans.html" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded-lg transition duration-300">
+                        选择学习计划
+                    </a>
+                </div>
+                
+                <!-- 深入计划 -->
+                <div class="plan-card bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 p-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-bold text-gray-800">深入计划</h4>
+                        <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">专业</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">总天数：</span>
+                        <span class="font-medium text-gray-800">365天</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">每日学习量：</span>
+                        <span class="font-medium text-gray-800">~5分钟</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-gray-600">适合人群：</span>
+                        <span class="font-medium text-gray-800">细致学习者</span>
+                    </div>
+                    <a href="learn-plans.html" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded-lg transition duration-300">
+                        选择学习计划
+                    </a>
+                </div>
+                
+                <!-- 自定义计划 -->
+                <div class="plan-card bg-gradient-to-r from-yellow-50 to-amber-50 border border-yellow-200 p-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-bold text-gray-800">自定义计划</h4>
+                        <span class="text-xs bg-yellow-100 text-yellow-600 px-2 py-1 rounded-full">会员专享</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">总天数：</span>
+                        <span class="font-medium text-gray-800">自定义</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-600">每日学习量：</span>
+                        <span class="font-medium text-gray-800">自定义</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-gray-600">适合人群：</span>
+                        <span class="font-medium text-gray-800">高级用户</span>
+                    </div>
+                    <a href="learn-plans.html" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded-lg transition duration-300">
+                        选择学习计划
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 内容目录 -->
+        <div class="bg-white shadow-md rounded-xl p-6 mb-6">
+            <h3 class="font-bold text-gray-800 mb-4">内容目录</h3>
+            <div class="chapter-list">
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-medium text-gray-800">第一章：平脉法</h4>
+                        <span class="text-sm text-gray-500">10条</span>
+                    </div>
+                    <p class="text-sm text-gray-600">包含望、闻、问、切四诊法，通过观察病人的形体、面色等全面了解病情</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-medium text-gray-800">第二章：太阳病脉证</h4>
+                        <span class="text-sm text-gray-500">38条</span>
+                    </div>
+                    <p class="text-sm text-gray-600">详述太阳病的症状、脉象和治疗方法，包括桂枝汤证、麻黄汤证等</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-medium text-gray-800">第三章：阳明病脉证</h4>
+                        <span class="text-sm text-gray-500">32条</span>
+                    </div>
+                    <p class="text-sm text-gray-600">阐述阳明病的表现、发展规律和治疗原则，包括白虎汤证、承气汤证等</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-medium text-gray-800">第四章：少阳病脉证</h4>
+                        <span class="text-sm text-gray-500">17条</span>
+                    </div>
+                    <p class="text-sm text-gray-600">论述少阳病的症状特点和治疗方法，以小柴胡汤为代表方</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-medium text-gray-800">第五章：太阴病脉证</h4>
+                        <span class="text-sm text-gray-500">12条</span>
+                    </div>
+                    <p class="text-sm text-gray-600">介绍太阴病的病机、证候和治法，以理中汤为主要方剂</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-medium text-gray-800">第六章：少阴病脉证</h4>
+                        <span class="text-sm text-gray-500">22条</span>
+                    </div>
+                    <p class="text-sm text-gray-600">阐述少阴病的临床表现和治疗方法，包括四逆汤、黄连阿胶汤等</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-medium text-gray-800">第七章：厥阴病脉证</h4>
+                        <span class="text-sm text-gray-500">15条</span>
+                    </div>
+                    <p class="text-sm text-gray-600">论述厥阴病的特征和治疗原则，以乌梅丸为代表方剂</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 用户评价 -->
+        <div class="bg-white shadow-md rounded-xl p-6 mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-gray-800">用户评价</h3>
+                <a href="#" class="text-sm text-purple-600">查看全部</a>
+            </div>
+            
+            <div class="mb-6">
+                <div class="flex items-center mb-3">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <h4 class="font-medium text-gray-800">王学者</h4>
+                        <div class="flex text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600">"作为中医学院的学生，我尝试过许多学习《伤寒论》的方法，但这个APP的听说读写四维学习法真的让我受益匪浅，学习效率提升了至少3倍。"</p>
+            </div>
+            
+            <div>
+                <div class="flex items-center mb-3">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <h4 class="font-medium text-gray-800">张博士</h4>
+                        <div class="flex text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600">"我选择了365天的深入计划，每天只需要5分钟，却能系统地学习全书。游戏化的学习方式让枯燥的内容变得有趣，强烈推荐给所有中医爱好者。"</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar py-2 px-4">
+        <div class="flex justify-around items-center">
+            <a href="home.html" class="flex flex-col items-center">
+                <i class="fas fa-home text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.home">首页</span>
+            </a>
+            <a href="books.html" class="flex flex-col items-center">
+                <i class="fas fa-book text-purple-600 text-lg"></i>
+                <span class="text-xs text-purple-600 font-medium mt-1" data-i18n="nav.books">书籍</span>
+            </a>
+            <a href="next-task.html" class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
+                    <i class="fas fa-play text-white text-lg"></i>
+                </div>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.practice">学习</span>
+            </a>
+            <a href="leaderboard.html" class="flex flex-col items-center">
+                <i class="fas fa-trophy text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.achievements">成就</span>
+            </a>
+            <a href="profile.html" class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1" data-i18n="nav.profile">我的</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

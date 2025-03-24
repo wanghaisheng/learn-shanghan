@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下一个学习任务 - 听说读写学伤寒</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F7F8FC;
+        }
+        
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        .task-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+        
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .task-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8));
+            z-index: 1;
+            border-radius: 16px;
+        }
+        
+        .task-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .loading-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 50;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #E2E8F0;
+            border-radius: 50%;
+            border-top-color: #8A2387;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div class="loading-animation" id="loading">
+        <div>
+            <div class="spinner mb-4"></div>
+            <p class="text-center text-gray-600 font-medium">正在分析您的下一个最佳学习任务...</p>
+        </div>
+    </div>
+
+    <div class="main-content pb-20">
+        <!-- 顶部导航 -->
+        <div class="bg-white p-4 shadow-sm sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <a href="home.html" class="p-2">
+                    <i class="fas fa-arrow-left text-gray-600"></i>
+                </a>
+                <div class="text-center">
+                    <h1 class="text-lg font-bold text-gray-800">待完成的学习任务</h1>
+                    <p class="text-sm text-gray-500">发现您的最佳学习路径</p>
+                </div>
+                <div class="p-2 invisible">
+                    <i class="fas fa-ellipsis-v text-gray-600"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="p-4">
+            <h2 class="text-lg font-bold text-gray-800 mb-6">今日待完成的任务</h2>
+            
+            <!-- 伤寒论任务 -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-gray-800">《伤寒杂病论》- 标准计划</h3>
+                    <span class="text-sm text-purple-600">第32天/180天</span>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- 听力任务 -->
+                    <a href="listen.html" class="task-card bg-gradient-to-r from-purple-500 to-indigo-500 shadow-lg p-6 text-white">
+                        <div class="task-content">
+                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-headphones text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-1">听力模式</h4>
+                            <p class="text-white text-opacity-90 mb-4">太阳病脉证 (2.30)</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-white text-opacity-90">预计用时: 5分钟</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 口语任务 -->
+                    <a href="speak.html" class="task-card bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg p-6 text-white">
+                        <div class="task-content">
+                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-microphone-alt text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-1">口语模式</h4>
+                            <p class="text-white text-opacity-90 mb-4">太阳病脉证 (2.30)</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-white text-opacity-90">预计用时: 3分钟</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 阅读任务 -->
+                    <a href="read.html" class="task-card bg-gradient-to-r from-green-500 to-emerald-500 shadow-lg p-6 text-white">
+                        <div class="task-content">
+                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-book-reader text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-1">阅读模式</h4>
+                            <p class="text-white text-opacity-90 mb-4">太阳病脉证 (2.30)</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-white text-opacity-90">预计用时: 4分钟</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 书写任务 -->
+                    <a href="write.html" class="task-card bg-gradient-to-r from-red-500 to-rose-500 shadow-lg p-6 text-white">
+                        <div class="task-content">
+                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-pen-fancy text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-1">书写模式</h4>
+                            <p class="text-white text-opacity-90 mb-4">太阳病脉证 (2.30)</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-white text-opacity-90">预计用时: 3分钟</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 金匮要略任务 -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-gray-800">《金匮要略》- 精简计划</h3>
+                    <span class="text-sm text-purple-600">第8天/90天</span>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- 听力任务 -->
+                    <a href="listen.html" class="task-card bg-gradient-to-r from-yellow-500 to-amber-500 shadow-lg p-6 text-white">
+                        <div class="task-content">
+                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-headphones text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-1">听力模式</h4>
+                            <p class="text-white text-opacity-90 mb-4">脏腑经络先后病脉证第一</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-white text-opacity-90">预计用时: 5分钟</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- 口语任务 -->
+                    <a href="speak.html" class="task-card bg-gradient-to-r from-orange-500 to-amber-500 shadow-lg p-6 text-white">
+                        <div class="task-content">
+                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-microphone-alt text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-1">口语模式</h4>
+                            <p class="text-white text-opacity-90 mb-4">脏腑经络先后病脉证第一</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-white text-opacity-90">预计用时: 3分钟</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl shadow-lg p-6 text-white">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-4">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-1">AI学习建议</h3>
+                        <p class="text-white text-opacity-90">基于您的学习模式和效率分析</p>
+                    </div>
+                </div>
+                <p class="mb-4">根据您的学习数据分析，建议先完成《伤寒杂病论》的听力模式，该模式与您最近的学习记忆效率最匹配。</p>
+                <div class="flex space-x-3 justify-end">
+                    <a href="learn-stages.html" class="bg-white bg-opacity-30 text-white px-4 py-2 rounded-lg font-medium hover:bg-opacity-40 transition">
+                        查看学习阶段
+                    </a>
+                    <a href="listen.html" class="bg-white text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-50 transition">
+                        开始推荐学习
+                        <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar py-2 px-4">
+        <div class="flex justify-around items-center">
+            <a href="home.html" class="flex flex-col items-center">
+                <i class="fas fa-home text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">首页</span>
+            </a>
+            <a href="books.html" class="flex flex-col items-center">
+                <i class="fas fa-book text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">书籍</span>
+            </a>
+            <a href="next-task.html" class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center -mt-5 shadow-lg">
+                    <i class="fas fa-play text-white text-lg"></i>
+                </div>
+                <span class="text-xs text-purple-600 font-medium mt-1">学习</span>
+            </a>
+            <a href="leaderboard.html" class="flex flex-col items-center">
+                <i class="fas fa-trophy text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">成就</span>
+            </a>
+            <a href="profile.html" class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg"></i>
+                <span class="text-xs text-gray-400 mt-1">我的</span>
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // 模拟加载效果
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading').style.display = 'none';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
